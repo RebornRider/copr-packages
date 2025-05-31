@@ -13,17 +13,15 @@ Release:     2%{gitrel}%{?dist}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
 Group:       User Interface/Desktops
-License:     GPLv3
+License:     GPL-3.0-or-later
 URL:         https://github.com/diegodario88/quake-terminal
 Source0:     %{url}/archive/%{commit}.tar.gz
 BuildArch:   noarch
 
-BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  make
 BuildRequires:  %{_bindir}/glib-compile-schemas
 BuildRequires:  gnome-shell >= 45~rc
 Requires:    gnome-shell >= 45~rc
-Requires:    glib2
 
 %description
 Quickly launch a terminal in Quake mode using a keyboard shortcut

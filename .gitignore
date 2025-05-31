@@ -4,3 +4,5 @@ rpmbuild/
 brew-out/
 arch_skipped
 overlays/
+*.rpm
+*.srpm

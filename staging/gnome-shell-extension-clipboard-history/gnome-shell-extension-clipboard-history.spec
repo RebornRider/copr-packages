@@ -18,15 +18,13 @@ URL:         https://github.com/SUPERCILEX/gnome-clipboard-history
 Source0:     %{url}/archive/%{commit}.tar.gz
 BuildArch:   noarch
 
-BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  make
 BuildRequires:  gettext
 BuildRequires:  %{_bindir}/glib-compile-schemas
 Requires:    gnome-shell >= 45~rc
-Requires:    glib2
 
 %description
-Gnome Clipboard History is a clipboard manager GNOME extension that saves items you've copied into an easily accessible, searchable history panel.
+Gnome Clipboard History is a clipboard manager
 
 %prep
 %autosetup -n gnome-clipboard-history-%{commit} -N
