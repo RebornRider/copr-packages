@@ -22,7 +22,7 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  make
 BuildRequires:  gettext
 BuildRequires:  %{_bindir}/glib-compile-schemas
-Requires:    gnome-shell >= 3.12
+Requires:    gnome-shell >= 45~rc
 Requires:    glib2
 
 %description

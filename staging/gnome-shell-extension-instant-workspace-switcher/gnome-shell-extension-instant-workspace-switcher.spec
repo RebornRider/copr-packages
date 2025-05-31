@@ -18,7 +18,7 @@ Source0:     %{url}/archive/%{commit}.tar.gz
 Patch0:      %{name}-extended-version-support.patch
 BuildArch:   noarch
 
-Requires:    gnome-shell >= 3.12
+Requires:    gnome-shell >= 45~rc
 
 %description
 Disables the workspace switch animation while preserving all other animations - instantly switch between workspaces with keyboard shortcuts.

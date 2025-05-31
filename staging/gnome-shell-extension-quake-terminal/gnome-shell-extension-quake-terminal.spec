@@ -19,11 +19,11 @@ Source0:     %{url}/archive/%{commit}.tar.gz
 BuildArch:   noarch
 
 BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  make
 BuildRequires:  %{_bindir}/glib-compile-schemas
-Requires:    gnome-shell >= 3.12
+BuildRequires:  gnome-shell >= 45~rc
+Requires:    gnome-shell >= 45~rc
 Requires:    glib2
-
-BuildRequires: make
 
 %description
 Quickly launch a terminal in Quake mode using a keyboard shortcut
