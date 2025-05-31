@@ -1,0 +1,38 @@
+From 2c6da3fa6b35a99d02ef68cb34a194dafc5f0310 Mon Sep 17 00:00:00 2001
+From: RebornRider <7119346+RebornRider@users.noreply.github.com>
+Date: Sat, 31 May 2025 22:18:36 +0100
+Subject: [PATCH 1/1] add critical temp and change default strategy
+
+---
+ src/fw_fanctrl/FanController.py       | 4 +++-
+ src/fw_fanctrl/_resources/config.json | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/fw_fanctrl/FanController.py b/src/fw_fanctrl/FanController.py
+index d42e746..85b6cea 100644
+--- a/src/fw_fanctrl/FanController.py
++++ b/src/fw_fanctrl/FanController.py
+@@ -141,7 +141,9 @@ class FanController:
+ 
+     def adapt_speed(self, current_temp):
+         current_strategy = self.get_current_strategy()
+-        current_temp = self.get_effective_temperature(current_temp, current_strategy.moving_average_interval)
++        critical_temp = 90
++        if critical_temp is not None and current_temp < critical_temp:
++            current_temp = self.get_effective_temperature(current_temp, current_strategy.moving_average_interval)
+         min_point = current_strategy.speed_curve[0]
+         max_point = current_strategy.speed_curve[-1]
+         for e in current_strategy.speed_curve:
+diff --git a/src/fw_fanctrl/_resources/config.json b/src/fw_fanctrl/_resources/config.json
+index 73b04b9..103ba4a 100644
+--- a/src/fw_fanctrl/_resources/config.json
++++ b/src/fw_fanctrl/_resources/config.json
+@@ -1,6 +1,6 @@
+ {
+     "$schema": "./config.schema.json",
+-    "defaultStrategy": "lazy",
++    "defaultStrategy": "medium",
+     "strategyOnDischarging" : "",
+     "strategies": {
+         "laziest": {
+

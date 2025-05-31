@@ -25,6 +25,7 @@ Requires:       python3
 Requires:       fw-ectool
 
 Patch0:         138-no-build.patch
+Patch1:         199-critical-temperature.patch
 
 Source1:        99-fw-fanctrl.rules
 
@@ -32,7 +33,7 @@ Source1:        99-fw-fanctrl.rules
 Framework Fan control script
 
 %prep
-%autosetup -n %{name}-%{commit}
+%autosetup -n %{name}-%{commit} -p1
 
 %build
 %pyproject_wheel
