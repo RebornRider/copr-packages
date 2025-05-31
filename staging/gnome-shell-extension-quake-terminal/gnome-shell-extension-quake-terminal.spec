@@ -13,7 +13,7 @@ Release:     2%{gitrel}%{?dist}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
 Group:       User Interface/Desktops
-License:     GPL-3.0-or-later
+License:     GPL-3.0-only
 URL:         https://github.com/diegodario88/quake-terminal
 Source0:     %{url}/archive/%{commit}.tar.gz
 BuildArch:   noarch
