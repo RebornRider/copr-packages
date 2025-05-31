@@ -97,7 +97,7 @@ if [[ -e "$PACKAGE/setup_sourcedir.sh" ]]; then
 else
 	spectool -C "$XDG_CACHE_HOME/rpmbuild.sh/$PACKAGE" --gf "$SPECDIR/$PACKAGE.spec"
 	while read -r source; do
-		sourcefile=$(echo "$source" | sed 's/^Patch[0-9]*: //')
+		sourcefile=$(echo "$source" | sed 's/^Patch[0-9]*: //' | sed 's/^Source[0-9]*: //')
 		echo "$sourcefile"
 		cp "$XDG_CACHE_HOME/rpmbuild.sh/$PACKAGE/$sourcefile" "$SOURCEDIR/$sourcefile"
 	done < <(spectool --lf "$SPECDIR/$PACKAGE.spec" | xargs -d"\n" -L1 basename)
