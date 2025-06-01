@@ -13,8 +13,8 @@ Source:  https://github.com/FrameworkComputer/%{name}/archive/refs/tags/v%{versi
 
 BuildRequires: cargo
 BuildRequires: rust
-BuildRequires: pkgconfig(udev)
-Requires: pkgconfig(udev)
+BuildRequires: systemd-devel #libudev for hidapi
+Requires: udev
 
 %description
 Rust tool to interact with the Framework Computer systems
