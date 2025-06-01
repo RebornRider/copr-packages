@@ -5,7 +5,7 @@ Version: 2.10.1
 Release: %autorelease
 Summary: A linux utility listing your filesystems
 # Main package is BSD-3-Clause, remaining licenses are from statically linked dependencies
-License: MIT AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (MIT) AND (MPL-2.0) AND (Unlicense OR MIT)
+License: MIT AND (Apache-2.0 OR BSL-1.0)AND (Apache-2.0 OR MIT)AND (Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT)AND (MIT OR Apache-2.0)AND (Unlicense OR MIT)
 
 URL:     https://github.com/Canop/%{name}
 Source0: https://github.com/Canop/%{name}/archive/refs/tags/v%{version}.tar.gz
