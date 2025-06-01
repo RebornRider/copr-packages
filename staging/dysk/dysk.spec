@@ -43,6 +43,7 @@ install -Dpm 0644 "$out_dir"/%{name}.1 -t %{buildroot}%{_mandir}/man1/
 
 %files
 %license LICENSE LICENSE.summary LICENSE.dependencies
+%doc README.md
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
 %{bash_completions_dir}/%{name}.bash
