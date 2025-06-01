@@ -25,7 +25,7 @@ export RUSTFLAGS="%{build_rustflags}"
 cargo build --release --locked
 
 for shell in 'bash' 'fish' 'zsh'; do
-  target/release/%{name} gen-completions -s "$shell" -o ./
+  target/release/%{name} gen-completions -s "$shell" -o .
 done
 
 # Generate license documentation
