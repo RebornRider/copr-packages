@@ -13,7 +13,7 @@ Source:  https://github.com/FrameworkComputer/%{name}/archive/refs/tags/v%{versi
 
 BuildRequires: cargo
 BuildRequires: rust
-BuildRequires: systemd-devel
+BuildRequires: pkgconfig(libudev)
 Requires: udev
 
 %description
