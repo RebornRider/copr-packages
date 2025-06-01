@@ -2,6 +2,8 @@
 %bcond check 1
 %bcond bootstrap 0
 
+%global debug_package %{nil}
+
 # https://github.com/gokcehan/lf
 %global goipath         github.com/gokcehan/lf
 Version:                r35

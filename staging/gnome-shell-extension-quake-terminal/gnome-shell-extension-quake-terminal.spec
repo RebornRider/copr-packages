@@ -1,6 +1,8 @@
 %global extuuid        quake-terminal@diegodario88.github.io
 %global extdir         %{_datadir}/gnome-shell/extensions/%{extuuid}
 %global gschemadir     %{_datadir}/glib-2.0/schemas
+%global debug_package  %{nil}
+
 
 # renovate: datasource=github-releases depName=diegodario88/quake-terminal
 %global commit      d6da7b7dd289477921d4db2deb8e820aa520941f

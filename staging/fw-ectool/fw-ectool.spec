@@ -1,4 +1,7 @@
 %global reponame    framework-ec
+
+%global debug_package   %{nil}
+
 # renovate: datasource=github-releases depName=DHowett/framework-ec
 %global commit      54c140399bbc3e6a3dce6c9f842727c4128367be
 %global shortcommit %(c=%{commit}; echo ${c:0:7})

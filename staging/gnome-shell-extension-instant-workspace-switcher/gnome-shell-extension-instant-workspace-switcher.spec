@@ -1,5 +1,7 @@
-%global extuuid    instantworkspaceswitcher@amalantony.net
-%global extdir     %{_datadir}/gnome-shell/extensions/%{extuuid}
+%global extuuid        instantworkspaceswitcher@amalantony.net
+%global extdir         %{_datadir}/gnome-shell/extensions/%{extuuid}
+%global debug_package  %{nil}
+
 
 # renovate: datasource=github-releases depName=amalantony/gnome-shell-extension-instant-workspace-switcher
 %global commit      58ed04b5f27bc2e8978398b5a2ad817d38070a52

@@ -3,6 +3,7 @@
 %bcond bootstrap 0
 
 %global debug_package %{nil}
+
 # https://github.com/Xuanwo/go-locale
 %global goipath         github.com/Xuanwo/go-locale
 Version:                1.1.3

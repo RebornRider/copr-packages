@@ -20,7 +20,7 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-%global debug_package %{nil}
+%global  debug_package %{nil}
 
 Name:    eza
 Version: 0.21.4

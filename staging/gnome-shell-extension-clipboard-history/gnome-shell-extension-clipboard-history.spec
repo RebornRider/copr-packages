@@ -1,6 +1,7 @@
 %global extuuid        clipboard-history@alexsaveau.dev
 %global extdir         %{_datadir}/gnome-shell/extensions/%{extuuid}
 %global gschemadir     %{_datadir}/glib-2.0/schemas
+%global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=SUPERCILEX/gnome-clipboard-history
 %global commit      c274be6bd2f5fdafe5832bc87607625811cdfcee
