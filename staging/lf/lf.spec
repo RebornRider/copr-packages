@@ -30,7 +30,6 @@ Provides: lfcd
 
 %description %{common_description}
 
-%gopkg
 
 %prep
 %goprep -A
@@ -43,9 +42,8 @@ export LDFLAGS="$LDFLAGS -X main.gVersion=%{version}"
 %gobuild -o %{gobuilddir}/bin/%{name} %{goipath}
 
 %install
-%gopkginstall
 install -m 0755 -vd                         %{buildroot}%{_bindir}
-install -m 0755 -vp %{gobuilddir}/bin/*     %{buildroot}%{_bindir}/
+install -m 0755 -vp %{gobuilddir}/bin/%{name}     %{buildroot}%{_bindir}/
 desktop-file-install %{name}.desktop        --dir=%{buildroot}%{_datadir}/applications
 # docs
 install -m 0644 -Dvp %{name}.1              %{buildroot}%{_mandir}/man1/%{name}.1
@@ -95,8 +93,6 @@ install -m 0644 -Dvp etc/%{name}.vim        %{buildroot}%{_datadir}/vim/vimfiles
 %dir %{_datadir}/vim/vimfiles
 %dir %{_datadir}/vim/vimfiles/plugin
 %{_datadir}/vim/vimfiles/plugin/%{name}.vim
-
-%gopkgfiles
 
 %changelog
 %autochangelog
