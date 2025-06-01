@@ -1,0 +1,13 @@
+[archive]
+
+[licensing]
+detector = "askalono"
+[[licensing.licenses]]
+path = "LICENSE-THIRD-PARTY"
+sha256sum = "5b906765c3fa2f0c74f0cdf5d7595be38dfb439c1e71e06451287b7ae9c0cd31"
+expression = "MIT"
+
+[[licensing.licenses]]
+path = "vendor/github.com/zyedidia/json5/LICENSE"
+sha256sum = "598015380703f97d5729581fde8f78e4c75af5ab0fd0aa18b6e6b75813302a4f"
+expression = "MIT"
