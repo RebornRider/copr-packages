@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Copyright © 2021-2025 rusty-snake
 #
 #Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,8 +19,6 @@
 #LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
-
-#!/bin/bash
 
 set -e
 
@@ -91,7 +91,7 @@ SPECDIR=$(rpm --define "_topdir $TOPDIR" --eval %_specdir)
 SRPMDIR=$(rpm --define "_topdir $TOPDIR" --eval %_srcrpmdir)
 mkdir -p "$BUILDDIR" "$RPMDIR" "$SOURCEDIR" "$SPECDIR" "$SRPMDIR"
 
-cp "$PACKAGE/$PACKAGE.spec" "$SPECDIR/$PACKAGE.spec"
+cp "$PACKAGE/"*"$PACKAGE.spec" "$SPECDIR/$PACKAGE.spec"
 if [[ -e "$PACKAGE/setup_sourcedir.sh" ]]; then
 	(cd "$PACKAGE" && source ./setup_sourcedir.sh)
 else
