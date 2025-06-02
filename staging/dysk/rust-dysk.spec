@@ -10,13 +10,13 @@
 
 Name:           rust-dysk
 Version:        2.10.1
-Release:        %autorelease -e 1
+Release:        %autorelease -e 2
 Summary:        Give information on mounted filesystems
 
 License:        MIT
 URL:            https://crates.io/crates/dysk
 Source:         %{crates_source}
-Source:         dysk-2.10.1-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/dysk-2.10.1-vendor.tar.xz
 
 BuildRequires:  cargo-rpm-macros >= 26
 

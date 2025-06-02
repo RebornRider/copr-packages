@@ -3,3 +3,5 @@ mock/
 rpmbuild/
 *.rpm
 *.srpm
+*-vendor.tar.xz
+*-vendor.tar.bz2
