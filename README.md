@@ -3,11 +3,6 @@ copr-packages
 
 Additional package for Fedora, missing in the offical repositories and RPMFusion.
 
-Currently this are:
-- gnome-shell-extension-clipboard-history
-- gnome-shell-extension-instant-workspace-switcher
-- gnome-shell-extension-quake-terminal
-
 Getting started
 ---------------
 
