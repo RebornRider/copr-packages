@@ -1,6 +1,7 @@
 %global extuuid        clipboard-history@alexsaveau.dev
 %global extdir         %{_datadir}/gnome-shell/extensions/%{extuuid}
 %global gschemadir     %{_datadir}/glib-2.0/schemas
+%global gschemafile    org.gnome.shell.extensions.clipboard-indicator.gschema.xml
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=SUPERCILEX/gnome-clipboard-history
@@ -10,7 +11,7 @@
 
 Name:        gnome-shell-extension-gnome-clipboard-history
 Version:     0.0.0
-Release:     2%{gitrel}%{?dist}
+Release:     4%{gitrel}%{?dist}
 Summary:     a clipboard manager for GNOME
 
 Group:       User Interface/Desktops
@@ -40,7 +41,7 @@ mkdir -p %{buildroot}%{extdir}
 unzip -q bundle.zip -d %{buildroot}%{extdir}/
 
 mkdir -p %{buildroot}%{gschemadir}
-%{__mv} -f %{buildroot}%{extdir}/schemas/org.gnome.shell.extensions.clipboard-indicator.gschema.xml %{buildroot}%{gschemadir}/org.gnome.shell.extensions.clipboard-indicator.gschema.xml
+%{__mv} -f %{buildroot}%{extdir}/schemas/%{gschemafile} -t %{buildroot}%{gschemadir}/
     
 # Cleanup crap.
 %{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas,locale}
@@ -49,7 +50,7 @@ mkdir -p %{buildroot}%{gschemadir}
 %doc README.md
 %license LICENSE
 %{extdir}
-%{gschemadir}/org.gnome.shell.extensions.clipboard-indicator.gschema.xml
+%{gschemadir}/%{gschemafile}
 
 %changelog
 %autochangelog

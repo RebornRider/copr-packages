@@ -1,8 +1,8 @@
 %global extuuid        quake-terminal@diegodario88.github.io
 %global extdir         %{_datadir}/gnome-shell/extensions/%{extuuid}
 %global gschemadir     %{_datadir}/glib-2.0/schemas
+%global gschemafile    org.gnome.shell.extensions.quake-terminal.gschema.xml
 %global debug_package  %{nil}
-
 
 # renovate: datasource=github-releases depName=diegodario88/quake-terminal
 %global commit      d6da7b7dd289477921d4db2deb8e820aa520941f
@@ -11,7 +11,7 @@
 
 Name:        gnome-shell-extension-quake-terminal
 Version:     0.0.0
-Release:     3%{gitrel}%{?dist}
+Release:     4%{gitrel}%{?dist}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
 Group:       User Interface/Desktops
@@ -41,7 +41,7 @@ mkdir -p %{buildroot}%{extdir}
 unzip -q %{extuuid}.shell-extension.zip -d %{buildroot}%{extdir}/
 
 mkdir -p %{buildroot}%{gschemadir}
-%{__mv} -f %{buildroot}%{extdir}/schemas/org.gnome.shell.extensions.quake-terminal.gschema.xml %{buildroot}%{gschemadir}/org.gnome.shell.extensions.quake-terminal.gschema.xml
+%{__mv} -f %{buildroot}%{extdir}/schemas/%{gschemafile} -t %{buildroot}%{gschemadir}/
     
 # Cleanup crap.
 %{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas}
@@ -50,7 +50,7 @@ mkdir -p %{buildroot}%{gschemadir}
 %doc README.md
 %license LICENSE
 %{extdir}
-%{gschemadir}/org.gnome.shell.extensions.quake-terminal.gschema.xml
+%{gschemadir}/%{gschemafile}
 
 %changelog
 %autochangelog
