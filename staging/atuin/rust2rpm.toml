@@ -1,0 +1,48 @@
+[package]
+extra-files = [
+    "%{bash_completions_dir}/%{crate}.bash",
+    "%{zsh_completions_dir}/_%{crate}",
+    "%{fish_completions_dir}/%{crate}.fish",
+]
+
+#[features]
+#enable-all = true
+
+[tests]
+run = [
+	"bins",
+	"tests",
+]
+
+skip = [
+	"multi_user_test",
+	"registration",
+	"change_password",
+	"sync",
+]
+
+comments = [
+	"failing without internet",
+	"failing without internet",
+	"failing without internet",
+	"failing without internet",
+]
+ 
+[scripts]
+build.post = [
+    "# generate completions",
+    "target/release/%{crate} gen-completions -s bash -o .",
+    "target/release/%{crate} gen-completions -s zsh -o .",
+    "target/release/%{crate} gen-completions -s fish -o .",
+]
+
+install.post = [
+    "# install shell completions",
+    "install -Dpm0644 %{crate}.bash \\",
+    "    %{buildroot}/%{bash_completions_dir}/%{crate}.bash",
+    "install -Dpm0644 %{crate}.fish \\",
+    "    %{buildroot}/%{fish_completions_dir}/%{crate}.fish",
+    "install -Dpm0644 _%{crate} \\",
+    "    %{buildroot}/%{zsh_completions_dir}/_%{crate}",
+]
+ 

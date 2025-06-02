@@ -1,0 +1,15 @@
+--- atuin-18.6.1/Cargo.toml	1970-01-01T00:00:01+00:00
++++ atuin-18.6.1/Cargo.toml	2025-06-02T11:37:15.255857+00:00
+@@ -237,11 +237,8 @@
+ [dev-dependencies.tracing-tree]
+ version = "0.4"
+ 
+-[target.'cfg(any(target_os = "windows", target_os = "macos"))'.dependencies.arboard]
+-version = "3.4"
+-optional = true
+-
+ [target.'cfg(target_os = "linux")'.dependencies.arboard]
+ version = "3.4"
+ features = ["wayland-data-control"]
+ optional = true
++
