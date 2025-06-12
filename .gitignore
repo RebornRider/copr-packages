@@ -5,3 +5,4 @@ rpmbuild/
 *.srpm
 *-vendor.tar.xz
 *-vendor.tar.bz2
+gnome-shell-extension-*.zip
