@@ -30,7 +30,7 @@ install.post = [
     "    -t %{buildroot}/%{_mandir}/man5/",
     "# install shell completions",
     "install -Dpm0644 completions/bash/%{crate} \\",
-    "    -t %{buildroot}/%{bash_completions_dir}/}",
+    "    -t %{buildroot}/%{bash_completions_dir}/",
     "install -Dpm0644 completions/fish/%{crate}.fish \\",
     "    -t %{buildroot}/%{fish_completions_dir}/",
     "install -Dpm0644 completions/zsh/_%{crate} \\",

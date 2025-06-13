@@ -9,14 +9,14 @@
 %global crate eza
 
 Name:           rust-eza
-Version:        0.21.3
-Release:        %autorelease -e 2
+Version:        0.21.4
+Release:        %autorelease -e 1
 Summary:        Modern replacement for ls
 
 License:        EUPL-1.2
 URL:            https://crates.io/crates/eza
 Source:         %{crates_source}
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/eza-0.21.3-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/eza-0.21.4-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          eza-fix-metadata-auto.diff
 
@@ -80,11 +80,11 @@ install -Dpm0644 target/man/%{crate}_colors-explanation.5 \
     -t %{buildroot}/%{_mandir}/man5/
 # install shell completions
 install -Dpm0644 completions/bash/%{crate} \
-    -t %{buildroot}/%{bash_completions_dir}
+    -t %{buildroot}/%{bash_completions_dir}/
 install -Dpm0644 completions/fish/%{crate}.fish \
-    -t %{buildroot}/%{fish_completions_dir}
+    -t %{buildroot}/%{fish_completions_dir}/
 install -Dpm0644 completions/zsh/_%{crate} \
-    -t %{buildroot}/%{zsh_completions_dir}
+    -t %{buildroot}/%{zsh_completions_dir}/
 
 %if %{with check}
 %check
