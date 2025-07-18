@@ -6,7 +6,7 @@
 
 # https://github.com/gokcehan/lf
 %global goipath         github.com/gokcehan/lf
-Version:                r35
+Version:                r36
 %global tag             %{version}
 
 %gometa -L -f
@@ -15,7 +15,7 @@ Version:                r35
 lf (as in "list files") is a terminal file manager written in Go with a heavy inspiration from the ranger file manager.}
 
 %global golicenses      LICENSE
-%global godocs          CONTRIBUTING.md README.md doc.md doc.txt
+%global godocs          CHANGELOG.md CONTRIBUTING.md README.md doc.md doc.txt
 
 Name:           lf
 Release:        %autorelease
