@@ -16,7 +16,6 @@ Group:       User Interface/Desktops
 License:     GPL-2.0-only
 URL:         https://github.com/amalantony/gnome-shell-extension-instant-workspace-switcher
 Source0:     %{url}/archive/%{commit}.tar.gz    
-Patch0:      %{name}-extended-version-support.patch
 BuildArch:   noarch
 
 Requires:    gnome-shell >= 45~rc
