@@ -6,13 +6,13 @@
 
 # https://github.com/gokcehan/lf
 %global goipath         github.com/gokcehan/lf
-Version:                r36
+Version:                r37
 %global tag             %{version}
 
 %gometa -L -f
 
 %global common_description %{expand:
-lf (as in "list files") is a terminal file manager written in Go with a heavy inspiration from the ranger file manager.}
+lf (as in "list files") is a terminal file manager written in Go.}
 
 %global golicenses      LICENSE
 %global godocs          CHANGELOG.md CONTRIBUTING.md README.md doc.md doc.txt
