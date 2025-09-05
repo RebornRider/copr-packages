@@ -2,7 +2,7 @@
 %global bin_name framework_tool
 
 Name:    framework-system
-Version: 0.4.3
+Version: 0.4.5
 Release: %autorelease -e 1
 Summary: Rust tool to interact with the Framework Computer systems
 # Main package is BSD-3-Clause, remaining licenses are from statically linked dependencies
