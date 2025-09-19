@@ -6,7 +6,7 @@
 
 # https://github.com/gokcehan/lf
 %global goipath         github.com/gokcehan/lf
-Version:                r37
+Version:                r38
 %global tag             %{version}
 
 %gometa -L -f
