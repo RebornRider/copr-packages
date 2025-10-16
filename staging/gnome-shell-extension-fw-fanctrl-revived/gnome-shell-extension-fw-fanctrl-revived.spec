@@ -5,13 +5,13 @@
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=ghostdevv/fw-fanctrl-revived-gnome-shell-extension
-%global commit      555bab46a5c0643171668fca0a73cb8d98cb70cb
+%global commit      c18f1f39715378fffd38dd86efb2aae59d3643b6
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-fw-fanctrl-revived
 Version:     0.0.0
-Release:     1%{gitrel}%{?dist}
+Release:     2%{gitrel}%{?dist}
 Summary:     A Gnome extension that controls your framework laptop fan profile
 
 Group:       User Interface/Desktops
