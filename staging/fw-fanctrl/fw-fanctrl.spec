@@ -1,4 +1,3 @@
-%global jobid 899
 %global debug_package %{nil}
 
 %global reponame    fw-fanctrl
@@ -9,7 +8,7 @@
 
 Name:           fw-fanctrl
 Version:        0.0.0
-Release:        11%{gitrel}%{?dist}
+Release:        12%{gitrel}%{?dist}
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause
