@@ -5,13 +5,13 @@
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=daitj/gnome-display-brightness-ddcutil
-%global commit      19cfc48607899893256530e2591d16fc36421e6a
+%global commit      7e92eb05dda6a4cf294247bd3f188d9c7bb5517a
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-gnome-display-brightness-ddcutil
 Version:     0.0.0
-Release:     4%{gitrel}%{?dist}
+Release:     5%{gitrel}%{?dist}
 Summary:     Display brightness slider for gnome shell using ddcutil backend
 
 Group:       User Interface/Desktops
