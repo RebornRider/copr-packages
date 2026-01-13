@@ -9,14 +9,14 @@
 %global crate atuin
 
 Name:           rust-atuin
-Version:        18.10.0
+Version:        18.11.0
 Release:        %autorelease -e 1
-Summary:        - magical shell history
+Summary:        Atuin - magical shell history
 
 License:        MIT
 URL:            https://crates.io/crates/atuin
 Source:         %{crates_source}
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.10.0-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.11.0-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
 
@@ -76,12 +76,6 @@ install -Dpm0644 _%{crate} \
 # * failing without internet
 # * failing without internet
 %{cargo_test -- --bins -- %{shrink:
-    --skip multi_user_test
-    --skip registration
-    --skip change_password
-    --skip sync
-}}
-%{cargo_test -- --tests -- %{shrink:
     --skip multi_user_test
     --skip registration
     --skip change_password
