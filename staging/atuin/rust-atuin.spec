@@ -15,7 +15,7 @@ Summary:        Atuin - magical shell history
 
 License:        MIT
 URL:            https://crates.io/crates/atuin
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.11.0.crate
+Source:         %{crates_source}
 Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.11.0-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
