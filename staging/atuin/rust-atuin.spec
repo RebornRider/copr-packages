@@ -11,7 +11,7 @@
 Name:           rust-atuin
 Version:        18.11.0
 Release:        %autorelease -e 2
-Summary:        Atuin - magical shell history
+Summary:        magical shell history
 
 License:        MIT
 URL:            https://crates.io/crates/atuin
