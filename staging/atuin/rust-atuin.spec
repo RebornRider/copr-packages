@@ -8,7 +8,7 @@
 
 Name:           atuin
 Version:        18.11.0
-Release:        %autorelease -e 3
+Release:        %autorelease -e 4
 Summary:        Magical shell history
 
 License:        MIT
@@ -37,7 +37,7 @@ cargo tree --workspace --edges no-build,no-dev,no-proc-macro --no-dedupe --prefi
 ./target/%{build_target}/dist/%{name} gen-completions -s fish -o .
 
 %install
-install -Dpm 0755 /target/%{build_target}/dist/%{name} -t %{buildroot}%{_bindir}/
+install -Dpm 0755 ./target/%{build_target}/dist/%{name} -t %{buildroot}%{_bindir}/
 
 # install shell completions
 install -Dpm0644 %{name}.bash \
@@ -48,7 +48,7 @@ install -Dpm0644 _%{name} \
     %{buildroot}/%{zsh_completions_dir}/_%{name}
 
 %files
-%license LICENSE LICENSE.dependencies cargo-vendor.txt
+%license LICENSE LICENSE.dependencies
 %doc README.md
 %{_bindir}/%{name}
 %{bash_completions_dir}/%{name}.bash
