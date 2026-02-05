@@ -9,7 +9,7 @@
 
 Name:        gnome-shell-extension-instant-workspace-switcher
 Version:     0.0.0
-Release:     6%{gitrel}%{?dist}
+Release:     7%{gitrel}%{?dist}
 Summary:     Disables the workspace switch animation
 
 Group:       User Interface/Desktops
@@ -20,7 +20,7 @@ BuildArch:   noarch
 
 Requires:    gnome-shell >= 45~rc
 
-Patch0:      %{name}-extended-version-support.patch
+#Patch0:      %{name}-extended-version-support.patch
 
 %description
 Disables the workspace switch animation while preserving all other animations.
