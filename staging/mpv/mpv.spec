@@ -1,6 +1,3 @@
-# Disable X11 for RHEL 10+
-%bcond x11 0 #%[%{undefined rhel} || 0%{?rhel} < 10]
-
 Name:           mpv
 Version:        0.41.0
 Release:        1%{?dist}
@@ -98,16 +95,10 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(zimg) >= 2.9
 BuildRequires:  pkgconfig(zlib)
-%if %{with x11}
-BuildRequires:  pkgconfig(vdpau)
-BuildRequires:  pkgconfig(xpresent)
-BuildRequires:  pkgconfig(xscrnsaver)
-BuildRequires:  pkgconfig(xv)
-%endif
 
 Requires:       hicolor-icon-theme
 Provides:       mplayer-backend
-Recommends:     (yt-dlp or youtube-dl)
+#Recommends:     yt-dlp
 Suggests:       yt-dlp
 
 %description
@@ -135,7 +126,7 @@ a library and facilitate easy integration into other applications.
 
 %package libs
 Summary: Dynamic library for Mpv frontends
-Recommends: (yt-dlp or youtube-dl)
+#Recommends: yt-dlp
 Suggests: yt-dlp
 
 %description libs
@@ -170,15 +161,6 @@ sed -e "s|/usr/local/etc|%{_sysconfdir}/%{name}|" -i etc/%{name}.conf
     -Ddvdnav=enabled \
     -Degl-drm=enabled \
     -Degl-wayland=enabled \
-%if %{with x11}
-    -Degl-x11=enabled \
-    -Dgl-x11=enabled \
-    -Dvaapi-x11=enabled \
-    -Dvdpau-gl-x11=enabled \
-    -Dvdpau=enabled \
-    -Dx11=enabled \
-    -Dxv=enabled \
-%endif
     -Degl=enabled \
     -Dgbm=enabled \
     -Dgl=enabled \
