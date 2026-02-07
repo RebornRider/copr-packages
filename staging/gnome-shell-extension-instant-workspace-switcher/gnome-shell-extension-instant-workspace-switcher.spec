@@ -3,13 +3,13 @@
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=amalantony/gnome-shell-extension-instant-workspace-switcher
-%global commit      875e22f799d23df754084f3d708dddb595c27900
+%global commit      5420f6ff9dcbc37c3d3d39913a49a4d0c31b9ac2
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-instant-workspace-switcher
 Version:     0.0.0
-Release:     7%{gitrel}%{?dist}
+Release:     8%{gitrel}%{?dist}
 Summary:     Disables the workspace switch animation
 
 Group:       User Interface/Desktops
