@@ -1,6 +1,6 @@
 Name:           mpv
 Version:        0.41.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          1
 
 # overall license is GPL-2.0-or-later and LGPL-2.1-or-later
@@ -93,7 +93,6 @@ BuildRequires:  pkgconfig(zlib)
 
 Requires:       hicolor-icon-theme
 Provides:       mplayer-backend
-#Recommends:     yt-dlp
 Suggests:       yt-dlp
 
 %description
@@ -121,7 +120,6 @@ a library and facilitate easy integration into other applications.
 
 %package libs
 Summary: Dynamic library for Mpv frontends
-#Recommends: yt-dlp
 Suggests: yt-dlp
 
 %description libs
