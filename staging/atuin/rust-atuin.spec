@@ -7,8 +7,8 @@
 %endif
 
 Name:           atuin
-Version:        18.11.0
-Release:        %autorelease -e 4
+Version:        18.12.0
+Release:        %autorelease -e 1
 Summary:        Magical shell history
 
 License:        MIT
