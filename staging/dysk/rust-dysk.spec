@@ -10,7 +10,7 @@
 
 Name:           rust-dysk
 Version:        3.6.0
-Release:        %autorelease -e 1
+Release:        %autorelease -e 2
 Summary:        Give information on mounted filesystems
 
 License:        MIT
