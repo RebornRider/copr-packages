@@ -1,5 +1,5 @@
---- atuin-18.12.0/Cargo.toml	2006-07-24T01:21:28+00:00
-+++ atuin-18.12.0/Cargo.toml	2026-02-10T11:18:17.813452+00:00
+--- atuin-18.12.1/Cargo.toml	2006-07-24T01:21:28+00:00
++++ atuin-18.12.1/Cargo.toml	2026-02-12T00:44:31.599908+00:00
 @@ -240,11 +240,8 @@
  [dev-dependencies.tracing-tree]
  version = "0.4"
