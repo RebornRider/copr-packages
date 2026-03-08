@@ -28,6 +28,9 @@ Rust tool to interact with the Framework Computer systems
 export RUSTFLAGS="%{build_rustflags}"
 cargo build --release --locked -p framework_tool
 
+./target/debug/framework_tool --generate-completions bash > completions/bash/%{bin_name}
+./target/debug/framework_tool --generate-completions zsh > completions/zsh/_%{bin_name}
+./target/debug/framework_tool --generate-completions fish > completions/fish/%{bin_name}.fish
 # Generate license documentation
 cargo tree --workspace --edges no-build,no-dev,no-proc-macro --no-dedupe --prefix none --format '{l}' | sort -u > LICENSE.summary
 cargo tree --workspace --edges no-build,no-dev,no-proc-macro --no-dedupe --prefix none --format '{l}: {p}' | sort -u > LICENSE.dependencies
