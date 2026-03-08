@@ -28,9 +28,6 @@ Rust tool to interact with the Framework Computer systems
 export RUSTFLAGS="%{build_rustflags}"
 cargo build --release --locked -p framework_tool
 
-./target/debug/framework_tool --generate-completions bash > completions/bash/%{bin_name}
-./target/debug/framework_tool --generate-completions zsh > completions/zsh/_%{bin_name}
-./target/debug/framework_tool --generate-completions fish > completions/fish/%{bin_name}.fish
 # Generate license documentation
 cargo tree --workspace --edges no-build,no-dev,no-proc-macro --no-dedupe --prefix none --format '{l}' | sort -u > LICENSE.summary
 cargo tree --workspace --edges no-build,no-dev,no-proc-macro --no-dedupe --prefix none --format '{l}: {p}' | sort -u > LICENSE.dependencies
@@ -41,7 +38,7 @@ install -Dpm 0755 target/release/%{bin_name} -t %{buildroot}%{_bindir}/
 # Shell completions
 install -Dpm 0644 completions/bash/%{bin_name} -t %{buildroot}/%{bash_completions_dir}
 install -Dpm 0644 completions/zsh/_%{bin_name} -t %{buildroot}/%{zsh_completions_dir}
-install -Dpm 0644 completions/fish/%{bin_name}.fish -t %{buildroot}/%{fish_completions_dir}.fish
+install -Dpm 0644 completions/fish/%{bin_name}.fish -t %{buildroot}/%{fish_completions_dir}
 
 %files
 %license LICENSE.md LICENSE.summary LICENSE.dependencies
