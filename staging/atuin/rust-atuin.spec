@@ -9,14 +9,14 @@
 %global crate atuin
 
 Name:           rust-atuin
-Version:        18.12.1
+Version:        18.13.3
 Release:        %autorelease -e 1
 Summary:        Atuin - magical shell history
 
 License:        MIT
 URL:            https://crates.io/crates/atuin
 Source:         %{crates_source}
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.12.1-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.13.3-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
 
@@ -39,6 +39,7 @@ License:        ((Apache-2.0 OR MIT) AND BSD-3-Clause) AND (0BSD OR MIT OR Apach
 %license LICENSE
 %license LICENSE.dependencies
 %license cargo-vendor.txt
+%doc CHANGELOG.md
 %doc README.md
 %{_bindir}/atuin
 %{bash_completions_dir}/%{crate}.bash
