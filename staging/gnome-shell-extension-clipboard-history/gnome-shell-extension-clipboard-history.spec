@@ -11,7 +11,7 @@
 
 Name:        gnome-shell-extension-gnome-clipboard-history
 Version:     1.4.7
-Release:     1%{gitrel}%{?dist}
+Release:     2%{gitrel}%{?dist}
 Summary:     a clipboard manager for GNOME
 
 Group:       User Interface/Desktops
