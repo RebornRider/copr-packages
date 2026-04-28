@@ -5,13 +5,13 @@
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=SUPERCILEX/gnome-clipboard-history
-%global commit      d397051a9c48c9c728438d4b4befb2764cab13fc
+%global commit      1d22d3df0fd36d226a665d6943c92e7417b75afc
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-gnome-clipboard-history
 Version:     1.4.7
-Release:     2%{gitrel}%{?dist}
+Release:     3%{gitrel}%{?dist}
 Summary:     a clipboard manager for GNOME
 
 Group:       User Interface/Desktops
@@ -25,7 +25,7 @@ BuildRequires:  gettext
 BuildRequires:  %{_bindir}/glib-compile-schemas
 Requires:    gnome-shell >= 45~rc
 
-Patch0:      %{name}-extended-version-support.patch
+#Patch0:      %{name}-extended-version-support.patch
 
 %description
 Gnome Clipboard History is a clipboard manager
