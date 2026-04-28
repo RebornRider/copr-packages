@@ -3,7 +3,7 @@
 
 Name:    framework-system
 Version: 0.6.2
-Release: %autorelease -e 1
+Release: %autorelease -e 2
 Summary: Rust tool to interact with the Framework Computer systems
 # Main package is BSD-3-Clause, remaining licenses are from statically linked dependencies
 License: BSD-3-Clause AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (MIT) AND (MPL-2.0) AND (Unlicense OR MIT)
@@ -36,9 +36,9 @@ cargo tree --workspace --edges no-build,no-dev,no-proc-macro --no-dedupe --prefi
 install -Dpm 0755 target/release/%{bin_name} -t %{buildroot}%{_bindir}/
 
 # Shell completions
-install -Dpm 0644 completions/bash/%{bin_name} -t %{buildroot}/%{bash_completions_dir}
-install -Dpm 0644 completions/zsh/_%{bin_name} -t %{buildroot}/%{zsh_completions_dir}
-install -Dpm 0644 completions/fish/%{bin_name}.fish -t %{buildroot}/%{fish_completions_dir}
+install -Dpm 0644 framework_tool/completions/bash/%{bin_name} -t %{buildroot}/%{bash_completions_dir}
+install -Dpm 0644 framework_tool/completions/zsh/_%{bin_name} -t %{buildroot}/%{zsh_completions_dir}
+install -Dpm 0644 framework_tool/completions/fish/%{bin_name}.fish -t %{buildroot}/%{fish_completions_dir}
 
 %files
 %license LICENSE.md LICENSE.summary LICENSE.dependencies
