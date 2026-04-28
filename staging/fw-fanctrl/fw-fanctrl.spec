@@ -7,8 +7,8 @@
 %global gitrel      .%{commit_date}.git%{shortcommit}
 
 Name:           fw-fanctrl
-Version:        0.0.0
-Release:        12%{gitrel}%{?dist}
+Version:        1.0.2
+Release:        1%{gitrel}%{?dist}
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause
@@ -23,8 +23,9 @@ BuildRequires:  python3dist(wheel)
 Requires:       python3
 Requires:       fw-ectool
 
-Patch0:         138-no-build.patch
-Patch1:         199-critical-temperature.patch
+Patch0:         110-update-jsonschema.patch
+Patch1:         138-no-build.patch
+Patch2:         199-critical-temperature.patch
 
 Source1:        99-fw-fanctrl.rules
 

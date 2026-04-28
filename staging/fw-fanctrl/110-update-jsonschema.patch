@@ -1,0 +1,22 @@
+From 419d432434d5374903d684690fb21deb9c4ab286 Mon Sep 17 00:00:00 2001
+From: Sven Ziegler <43136984+Svenum@users.noreply.github.com>
+Date: Mon, 1 Sep 2025 23:30:26 +0200
+Subject: [PATCH] update jsonschema (#160)
+
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index c959f95..d951c99 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -46,7 +46,7 @@ classifiers = [
+ ]
+ requires-python = ">=3.12"
+ dependencies = [
+-    "jsonschema~=4.23.0"
++    "jsonschema==4.*"
+ ]
+ optional-dependencies = { dev = [
+     "black==24.8.0",
