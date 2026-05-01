@@ -1,19 +1,13 @@
 %global debug_package %{nil}
 
-%global reponame    fw-fanctrl
-%global commit      80ecc5d273b46f715d924c49234b6867fe3daf33
-%global commit_date 20250302
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitrel      .%{commit_date}.git%{shortcommit}
-
 Name:           fw-fanctrl
-Version:        1.0.2
-Release:        1%{gitrel}%{?dist}
+Version:        1.0.4
+Release:        1%{?dist}
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause
 URL:            https://github.com/TamtamHero/%{name}
-Source0:        https://github.com/TamtamHero/%{name}/archive/%{commit}.tar.gz
+Source0:        https://github.com/TamtamHero/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  python3-devel
@@ -23,9 +17,8 @@ BuildRequires:  python3dist(wheel)
 Requires:       python3
 Requires:       fw-ectool
 
-Patch0:         110-update-jsonschema.patch
-Patch1:         138-no-build.patch
-Patch2:         199-critical-temperature.patch
+Patch0:         138-no-build.patch
+Patch1:         199-critical-temperature.patch
 
 Source1:        99-fw-fanctrl.rules
 
@@ -44,9 +37,8 @@ Framework Fan control script
     --no-pip-install \
     --no-pip-build \
     --no-post-install \
-    --no-override-python-installation-path \
-    -p %{buildroot}/usr \
-    --sysconf-dir %{buildroot}/etc
+    -d %{buildroot} \
+    --effective-installation-dir /usr/bin
 %pyproject_install
 
 install -D -m 0644 %{SOURCE1} %{buildroot}%{_udevrulesdir}/99-fw-fanctrl.rules
