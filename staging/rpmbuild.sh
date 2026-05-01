@@ -103,7 +103,10 @@ else
 	done < <(spectool --lf "$SPECDIR/$PACKAGE.spec" | xargs -d"\n" -L1 basename)
 fi
 
-if [[ -e "$PACKAGE/sources" ]]; then
+# NOTE: file is named sources.txt (not sources) on purpose: rpkg-util/COPR
+# treats a file literally named `sources` as a Fedora dist-git lookaside-cache
+# pointer and tries to fetch from a non-existent URL.
+if [[ -e "$PACKAGE/sources.txt" ]]; then
 	while IFS= read -r line; do
 		[[ -z "$line" || "$line" == \#* ]] && continue
 		# Format: "SHA512 (filename) = hash"  or  "SHA256 (filename) = hash"
@@ -111,7 +114,7 @@ if [[ -e "$PACKAGE/sources" ]]; then
 		filename="${line#*\(}"; filename="${filename%%)*}"
 		expected="${line##* }"
 		if [[ ! -e "$SOURCEDIR/$filename" ]]; then
-			echo "rpmbuild.sh: $filename listed in $PACKAGE/sources but not fetched" >&2
+			echo "rpmbuild.sh: $filename listed in $PACKAGE/sources.txt but not fetched" >&2
 			exit 6
 		fi
 		actual=$("${algo,,}sum" "$SOURCEDIR/$filename" | awk '{print $1}')
@@ -122,7 +125,7 @@ if [[ -e "$PACKAGE/sources" ]]; then
 			exit 6
 		fi
 		echo "rpmbuild.sh: verified $filename ($algo)"
-	done < "$PACKAGE/sources"
+	done < "$PACKAGE/sources.txt"
 fi
 
 BWRAP_ARGS=(
