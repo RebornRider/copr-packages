@@ -11,7 +11,7 @@
 
 Name:        gnome-shell-extension-quake-terminal
 Version:     1.1.0
-Release:     1%{gitrel}%{?dist}
+Release:     2%{gitrel}%{?dist}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
 Group:       User Interface/Desktops
@@ -22,7 +22,6 @@ BuildArch:   noarch
 
 BuildRequires:  make
 BuildRequires:  %{_bindir}/glib-compile-schemas
-BuildRequires:  gnome-shell >= 45~rc
 Requires:    gnome-shell >= 45~rc
 
 %description
@@ -44,7 +43,7 @@ mkdir -p %{buildroot}%{gschemadir}
 %{__mv} -f %{buildroot}%{extdir}/schemas/%{gschemafile} -t %{buildroot}%{gschemadir}/
     
 # Cleanup crap.
-%{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas}
+%{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas,locale}
 
 %files
 %doc README.md

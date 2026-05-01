@@ -11,36 +11,39 @@
 
 Name:        gnome-shell-extension-fw-fanctrl-revived
 Version:     8.0.0
-Release:     1%{gitrel}%{?dist}
+Release:     2%{gitrel}%{?dist}
 Summary:     A Gnome extension that controls your framework laptop fan profile
 
 Group:       User Interface/Desktops
 License:     MIT
 URL:         https://github.com/ghostdevv/fw-fanctrl-revived-gnome-shell-extension
-Source0:     https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/gnome-shell-extension-fw-fanctrl-revived-%{shortcommit}.zip    
+Source0:     https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/gnome-shell-extension-fw-fanctrl-revived-%{shortcommit}.zip
 BuildArch:   noarch
+
+BuildRequires:  unzip
+BuildRequires:  %{_bindir}/glib-compile-schemas
 
 Requires:    gnome-shell >= 45~rc
 
 %description
-A Gnome extension that provides a convenient way to 
+A Gnome extension that provides a convenient way to
 control your framework laptop fan profile when using fw-fanctrl
 
 %prep
 %autosetup -n gnome-shell-extension-fw-fanctrl-revived -N
 
 %build
-ls -lah
+# Source artefact is a pre-built extension bundle; nothing to compile.
 
 %install
 mkdir -p %{buildroot}%{extdir}
-cp -r "$(dirname "$dir")" %{buildroot}%{extdir}/
+cp -a . %{buildroot}%{extdir}/
 
 mkdir -p %{buildroot}%{gschemadir}
-%{__mv} -f schemas/%{gschemafile} -t %{buildroot}%{gschemadir}/
+%{__mv} -f %{buildroot}%{extdir}/schemas/%{gschemafile} %{buildroot}%{gschemadir}/
 
 # Cleanup crap.
-%{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas} 
+%{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas,locale}
 
 %files
 %doc README.md
