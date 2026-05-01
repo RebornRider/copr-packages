@@ -17,7 +17,7 @@ golang file times (atime, mtime, ctime, btime).}
 %global godocs          example README.md
 
 Name:           golang-github-djherbis-times
-Release:        %autorelease
+Release:        %autorelease -e 1
 Summary:        golang file times (atime, mtime, ctime, btime)
 
 License:        MIT
@@ -33,6 +33,9 @@ Source:         %{gosource}
 
 %generate_buildrequires
 %go_generate_buildrequires
+
+%build
+# Pure Go library; %%gopkg ships sources only, nothing to compile.
 
 %install
 %gopkginstall

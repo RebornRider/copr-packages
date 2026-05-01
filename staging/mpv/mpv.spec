@@ -2,7 +2,7 @@
 
 Name:           mpv
 Version:        0.41.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Epoch:          2
 
 # overall license is GPL-2.0-or-later and LGPL-2.1-or-later
@@ -94,7 +94,7 @@ BuildRequires:  pkgconfig(zimg) >= 2.9
 BuildRequires:  pkgconfig(zlib)
 
 Requires:       hicolor-icon-theme
-Provides:       mplayer-backend
+Provides:       mplayer-backend = %{?epoch:%{epoch}:}%{version}-%{release}
 Suggests:       yt-dlp
 
 %description
@@ -229,7 +229,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-	* Thu Mar 19 2026 Nicolas Chauvet <kwizart@gmail.com> - 0.41.0-5
+* Thu Mar 19 2026 Nicolas Chauvet <kwizart@gmail.com> - 0.41.0-5
 - Rebuilt for libplacebo
  
 * Wed Feb 18 2026 Simone Caronni <negativo17@gmail.com> - 0.41.0-4

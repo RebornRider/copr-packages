@@ -9,10 +9,9 @@
 
 Name:        gnome-shell-extension-instant-workspace-switcher
 Version:     0.0.0
-Release:     10%{gitrel}%{?dist}
+Release:     11%{gitrel}%{?dist}
 Summary:     Disables the workspace switch animation
 
-Group:       User Interface/Desktops
 License:     GPL-2.0-only
 URL:         https://github.com/amalantony/gnome-shell-extension-instant-workspace-switcher
 Source0:     %{url}/archive/%{commit}.tar.gz    

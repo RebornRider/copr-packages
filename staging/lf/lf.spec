@@ -18,7 +18,7 @@ lf (as in "list files") is a terminal file manager written in Go.}
 %global godocs          CHANGELOG.md CONTRIBUTING.md README.md doc.md doc.txt
 
 Name:           lf
-Release:        %autorelease
+Release:        %autorelease -e 2
 Summary:        Terminal file manager
 
 License:        MIT
@@ -28,7 +28,7 @@ Source:         %{gosource}
 BuildRequires:  desktop-file-utils
 
 # Provided as script in /etc/profile.d
-Provides: lfcd
+Provides: lfcd = %{version}-%{release}
 
 %description %{common_description}
 
@@ -66,6 +66,7 @@ install -m 0644 -Dvp etc/%{name}.vim        %{buildroot}%{_datadir}/vim/vimfiles
 
 %if %{with check}
 %check
+desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %gocheck
 %endif
 

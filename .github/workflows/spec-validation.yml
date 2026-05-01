@@ -1,0 +1,43 @@
+name: Spec validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Least-privilege token: this workflow only reads the repo.
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    # Image pinned to digest so a Fedora rebuild can't silently change linting
+    # behavior. Bump manually (or via Renovate/Dependabot) when refreshing.
+    container:
+      image: fedora:latest@sha256:498c452f32a739b61f0ef215bce9924ebc4866cbe44710f58157d77723b7a6d2
+
+    steps:
+      # Pinned to commit SHA, not @v4 — moving tags can be re-pointed by a maintainer.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4.3.1
+
+      - name: Install tooling
+        run: dnf -y install rpmlint rpm-build rpkg
+
+      - name: Parse all specs
+        run: |
+          fail=0
+          for spec in staging/*/*.spec; do
+            echo "::group::$spec"
+            if ! rpmspec -P "$spec" >/dev/null; then
+              fail=1
+            fi
+            echo "::endgroup::"
+          done
+          exit $fail
+
+      # --strict promotes warnings to errors. staging/.rpmlintrc filters
+      # deliberately accepted warnings (e.g. no-%check-section) so genuine new
+      # findings still fail the build.
+      - name: Lint all specs
+        run: rpmlint --strict --info -r staging/.rpmlintrc staging/*/*.spec

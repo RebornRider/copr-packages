@@ -8,7 +8,7 @@
 
 Name:           %{real_name}-kmod-common
 Version:        %autorelease
-Release:        2%{gitrel}%{?dist}
+Release:        3%{gitrel}%{?dist}
 Summary:        Kernel module to expose more Framework Laptop stuff
 License:        GPL-2.0-only
 URL:            https://github.com/DHowett/framework-laptop-kmod
@@ -25,6 +25,12 @@ battery charge limit and LEDs to userspace.
 
 %prep
 %autosetup -p1 -n %{real_name}-kmod-%{commit}
+
+%build
+# Docs-only subpackage; nothing to compile.
+
+%install
+# Files shipped come from %%prep; no install steps required.
 
 %files
 %license LICENSE

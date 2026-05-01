@@ -10,7 +10,7 @@
 
 Name:           fw-ectool
 Version:        v0.3.3
-Release:        4%{gitrel}%{?dist}
+Release:        5%{gitrel}%{?dist}
 Summary:        A tool for interacting with the embedded controller on a Framework laptop
 
 License:        BSD-3-Clause
@@ -30,7 +30,8 @@ A tool for interacting with the embedded controller on a Framework laptop.
 %autosetup -n %{reponame}-%{commit}
 
 %build
-make utils
+%set_build_flags
+make utils %{?_smp_mflags}
 
 %install
 install -Dm755 build/bds/util/ectool %{buildroot}%{_bindir}/ectool

@@ -1,0 +1,11 @@
+# Project-wide rpmlint filters for staging/.
+#
+# Each addFilter() pattern is matched as a regex against rpmlint's full output
+# line. Use this file for warnings that are deliberately accepted across the
+# entire repo; per-package quirks should go in a sibling .rpmlintrc next to
+# the affected spec instead.
+
+# Many of these packages are leaf binaries or pre-built artefacts with no
+# upstream test suite, or the test suite requires network/hardware that mock
+# can't provide. We deliberately omit %check rather than ship an empty one.
+addFilter("no-%check-section")

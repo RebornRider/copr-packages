@@ -103,6 +103,28 @@ else
 	done < <(spectool --lf "$SPECDIR/$PACKAGE.spec" | xargs -d"\n" -L1 basename)
 fi
 
+if [[ -e "$PACKAGE/sources" ]]; then
+	while IFS= read -r line; do
+		[[ -z "$line" || "$line" == \#* ]] && continue
+		# Format: "SHA512 (filename) = hash"  or  "SHA256 (filename) = hash"
+		algo="${line%% *}"
+		filename="${line#*\(}"; filename="${filename%%)*}"
+		expected="${line##* }"
+		if [[ ! -e "$SOURCEDIR/$filename" ]]; then
+			echo "rpmbuild.sh: $filename listed in $PACKAGE/sources but not fetched" >&2
+			exit 6
+		fi
+		actual=$("${algo,,}sum" "$SOURCEDIR/$filename" | awk '{print $1}')
+		if [[ "$actual" != "$expected" ]]; then
+			echo "rpmbuild.sh: $filename: $algo mismatch" >&2
+			echo "  expected: $expected" >&2
+			echo "  actual:   $actual" >&2
+			exit 6
+		fi
+		echo "rpmbuild.sh: verified $filename ($algo)"
+	done < "$PACKAGE/sources"
+fi
+
 BWRAP_ARGS=(
 	# TODO: --seccomp
 	--die-with-parent
@@ -121,6 +143,7 @@ BWRAP_ARGS=(
 	--ro-bind-try /etc/dnf /etc/dnf
 	--ro-bind-try /etc/rpm /etc/rpm
 	--ro-bind-try /etc/rpmrc /etc/rpmrc
+	--ro-bind-try /etc/selinux /etc/selinux
 	--ro-bind-try /etc/yum.repos.d /etc/yum.repos.d
 	--ro-bind-try /var/cache/dnf /var/cache/dnf
 	--ro-bind-try /var/lib/dnf /var/lib/dnf
@@ -154,7 +177,11 @@ else
 fi
 
 if [[ -z "$RBS_NOLINT" ]]; then
-	rpmlint --info "$SPECDIR"/*.spec "$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm ||:
+	RPMLINT_ARGS=(--info)
+	if [[ -e .rpmlintrc ]]; then
+		RPMLINT_ARGS+=(-r "$PWD/.rpmlintrc")
+	fi
+	rpmlint "${RPMLINT_ARGS[@]}" "$SPECDIR"/*.spec "$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm ||:
 fi
 
 cp "$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm .

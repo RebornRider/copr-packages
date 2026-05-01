@@ -11,10 +11,9 @@
 
 Name:        gnome-shell-extension-fw-fanctrl-revived
 Version:     8.0.0
-Release:     2%{gitrel}%{?dist}
+Release:     3%{gitrel}%{?dist}
 Summary:     A Gnome extension that controls your framework laptop fan profile
 
-Group:       User Interface/Desktops
 License:     MIT
 URL:         https://github.com/ghostdevv/fw-fanctrl-revived-gnome-shell-extension
 Source0:     https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/gnome-shell-extension-fw-fanctrl-revived-%{shortcommit}.zip
