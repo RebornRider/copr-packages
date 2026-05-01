@@ -2,7 +2,7 @@
 
 Name:           fw-fanctrl
 Version:        1.0.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause
@@ -11,6 +11,7 @@ Source0:        https://github.com/TamtamHero/%{name}/archive/v%{version}/%{name
 
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  python3-devel
+BuildRequires:  python3-pip
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(wheel)
 Requires:       python3
