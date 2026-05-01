@@ -22,7 +22,9 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4.3.1
 
       - name: Install tooling
-        run: dnf -y install rpmlint rpm-build rpkg
+        # glibc-langpack-en provides en_US.UTF-8 — the minimal Fedora image
+        # only has C, and rpm's shell expansions warn under that locale.
+        run: dnf -y install rpmlint rpm-build rpkg glibc-langpack-en
 
       - name: Parse all specs
         run: |
