@@ -20,7 +20,7 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-set -e
+set -euo pipefail
 
 shopt -s nullglob
 
@@ -49,40 +49,39 @@ while getopts "hlnsi" opt; do
 			exit 0
 		;;
 		l)
-			RBS_NOLINT=true
+			RBS_NOLINT="${RBS_NOLINT:-true}"
 		;;
 		n)
-			RBS_NODEPS=true
+			RBS_NODEPS="${RBS_NODEPS:-true}"
 		;;
 		s)
-			RBS_NOSANDBOX=true
+			RBS_NOSANDBOX="${RBS_NOSANDBOX:-true}"
 		;;
 		i)
-			RBS_SANDBOX_INET=true
+			RBS_SANDBOX_INET="${RBS_SANDBOX_INET:-true}"
 		;;
 		*)
 			exit 2
 		;;
 	esac
 done
-PACKAGE="${!OPTIND}"
+PACKAGE="${!OPTIND:-}"
 
-if [[ -z "$PACKAGE" ]]; then
+if [[ -z "${PACKAGE:-}" ]]; then
 	usage
 	exit 2
 fi
 
 REQUIRED_PROGRAMS=(rpmbuild rpmlint spectool)
 for program in "${REQUIRED_PROGRAMS[@]}"; do
-	if ! command -v $program >&-; then
+	if ! command -v "$program" >/dev/null 2>&1; then
 		echo "rpmbuild.sh: Please install $program: sudo dnf install \"\$(dnf repoquery --whatprovides \"/usr/bin/$program\" 2>/dev/null)\""
 		exit 5
 	fi
 done
 
 TOPDIR="$(mktemp -d /var/tmp/rpmbuild.sh-XXXXXX)"
-# shellcheck disable=SC2064
-trap "rm -rf '$TOPDIR'" EXIT
+trap 'rm -rf "$TOPDIR"' EXIT
 
 BUILDDIR=$(rpm --define "_topdir $TOPDIR" --eval %_builddir)
 RPMDIR=$(rpm --define "_topdir $TOPDIR" --eval %_rpmdir)
@@ -91,7 +90,13 @@ SPECDIR=$(rpm --define "_topdir $TOPDIR" --eval %_specdir)
 SRPMDIR=$(rpm --define "_topdir $TOPDIR" --eval %_srcrpmdir)
 mkdir -p "$BUILDDIR" "$RPMDIR" "$SOURCEDIR" "$SPECDIR" "$SRPMDIR"
 
-cp "$PACKAGE/"*"$PACKAGE.spec" "$SPECDIR/$PACKAGE.spec"
+spec_files=("$PACKAGE/"*"$PACKAGE.spec")
+if (( ${#spec_files[@]} == 0 )); then
+	echo "rpmbuild.sh: No spec file found matching $PACKAGE/*$PACKAGE.spec" >&2
+	exit 1
+fi
+cp "${spec_files[0]}" "$SPECDIR/$PACKAGE.spec"
+
 if [[ -e "$PACKAGE/setup_sourcedir.sh" ]]; then
 	(cd "$PACKAGE" && source ./setup_sourcedir.sh)
 else
@@ -99,7 +104,11 @@ else
 	while read -r source; do
 		sourcefile=$(echo "$source" | sed 's/^Patch[0-9]*: //' | sed 's/^Source[0-9]*: //')
 		echo "$sourcefile"
-		cp "$XDG_CACHE_HOME/rpmbuild.sh/$PACKAGE/$sourcefile" "$SOURCEDIR/$sourcefile"
+		if [[ -f "$PACKAGE/$sourcefile" ]]; then
+			cp "$PACKAGE/$sourcefile" "$SOURCEDIR/$sourcefile"
+		else
+			cp "$XDG_CACHE_HOME/rpmbuild.sh/$PACKAGE/$sourcefile" "$SOURCEDIR/$sourcefile"
+		fi
 	done < <(spectool --lf "$SPECDIR/$PACKAGE.spec" | xargs -d"\n" -L1 basename)
 fi
 
@@ -154,7 +163,7 @@ BWRAP_ARGS=(
 	--dir /var/tmp
 	--bind "$TOPDIR" "$TOPDIR"
 )
-if [[ -n "$RBS_SANDBOX_INET" ]]; then
+if [[ -n "${RBS_SANDBOX_INET:-}" ]]; then
 	BWRAP_ARGS+=(
 		--share-net
 		--ro-bind-try /etc/resolv.conf /etc/resolv.conf
@@ -167,24 +176,32 @@ RPMBUILD_ARGS=(
 	--nodebuginfo
 	--define "_topdir $TOPDIR"
 )
-if [[ -n "$RBS_NODEPS" ]]; then
+if [[ -n "${RBS_NODEPS:-}" ]]; then
 	RPMBUILD_ARGS+=(--nodeps)
 fi
 
 RPMBUILD_CMD=(rpmbuild "${RPMBUILD_ARGS[@]}" -bb "$SPECDIR/$PACKAGE.spec")
 
-if [[ -n "$RBS_NOSANDBOX" ]]; then
+if [[ -n "${RBS_NOSANDBOX:-}" ]]; then
 	"${RPMBUILD_CMD[@]}"
 else
 	bwrap "${BWRAP_ARGS[@]}" -- "${RPMBUILD_CMD[@]}"
 fi
 
-if [[ -z "$RBS_NOLINT" ]]; then
+if [[ -z "${RBS_NOLINT:-}" ]]; then
 	RPMLINT_ARGS=(--info)
 	if [[ -e .rpmlintrc ]]; then
 		RPMLINT_ARGS+=(-r "$PWD/.rpmlintrc")
 	fi
-	rpmlint "${RPMLINT_ARGS[@]}" "$SPECDIR"/*.spec "$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm ||:
+	lint_targets=("$SPECDIR"/*.spec "$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm)
+	if (( ${#lint_targets[@]} > 0 )); then
+		rpmlint "${RPMLINT_ARGS[@]}" "${lint_targets[@]}" ||:
+	else
+		echo "rpmbuild.sh: No files found to lint." >&2
+	fi
 fi
 
-cp "$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm .
+rpms=("$RPMDIR"/*/*.rpm "$SRPMDIR"/*.rpm)
+if (( ${#rpms[@]} > 0 )); then
+	cp "${rpms[@]}" .
+fi
