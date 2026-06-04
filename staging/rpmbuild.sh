@@ -27,7 +27,7 @@ shopt -s nullglob
 cd -P -- "$(readlink -e "$(dirname "$0")")"
 
 USER="${USER:-$(id -un)}"
-HOME="${HOME:-$(getent passwd $USER | cut -d: -f7)}"
+HOME="${HOME:-$(getent passwd "$USER" | cut -d: -f7)}"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 usage() {
@@ -97,6 +97,7 @@ if (( ${#spec_files[@]} == 0 )); then
 fi
 cp "${spec_files[0]}" "$SPECDIR/$PACKAGE.spec"
 
+# shellcheck source=/dev/null
 if [[ -e "$PACKAGE/setup_sourcedir.sh" ]]; then
 	(cd "$PACKAGE" && source ./setup_sourcedir.sh)
 else
@@ -153,9 +154,11 @@ BWRAP_ARGS=(
 	--dir /tmp
 	--ro-bind-try /etc/alternatives /etc/alternatives
 	--ro-bind-try /etc/dnf /etc/dnf
+	--ro-bind-try /etc/pki /etc/pki
 	--ro-bind-try /etc/rpm /etc/rpm
 	--ro-bind-try /etc/rpmrc /etc/rpmrc
 	--ro-bind-try /etc/selinux /etc/selinux
+	--ro-bind-try /etc/ssl /etc/ssl
 	--ro-bind-try /etc/yum.repos.d /etc/yum.repos.d
 	--ro-bind-try /var/cache/dnf /var/cache/dnf
 	--ro-bind-try /var/lib/dnf /var/lib/dnf
@@ -167,8 +170,6 @@ if [[ -n "${RBS_SANDBOX_INET:-}" ]]; then
 	BWRAP_ARGS+=(
 		--share-net
 		--ro-bind-try /etc/resolv.conf /etc/resolv.conf
-		--ro-bind-try /etc/pki /etc/pki
-		--ro-bind-try /etc/ssl /etc/ssl
 	)
 fi
 
