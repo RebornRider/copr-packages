@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           fw-fanctrl
-Version:        1.0.5
+Version:        1.1.0
 Release:        1%{?dist}
 Summary:        Framework FanControl Software
 
@@ -16,7 +16,7 @@ BuildRequires:  python3-pip
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(wheel)
 Requires:       python3
-Requires:       fw-ectool
+Requires:       %{_bindir}/framework_tool
 
 Patch0:         138-no-build.patch
 Patch1:         199-critical-temperature.patch
@@ -36,7 +36,7 @@ as a systemd service and supports runtime strategy switching.
 
 %install
 ./install.sh --no-sudo \
-    --no-ectool \
+    --ignore-tool framework_tool \
     --no-pip-install \
     --no-pip-build \
     --no-post-install \

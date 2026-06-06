@@ -16,31 +16,31 @@ needed: the new --effective-installation-dir (added upstream) already
 lets the caller pin PYTHON_SCRIPT_INSTALLATION_PATH to /usr/bin/fw-fanctrl
 without leaking %{buildroot} into the systemd units.
 ---
- install.sh | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ install.sh | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/install.sh b/install.sh
-index 44c5367..b1db7eb 100755
+index f2a0ffd..0a3c0ef 100644
 --- a/install.sh
 +++ b/install.sh
 @@ -3,7 +3,7 @@ set -e
  
  # Argument parsing
  SHORT=r,d:,p:,s:,h
--LONG=remove,dest-dir:,prefix-dir:,sysconf-dir:,no-ectool,no-pre-uninstall,no-post-install,no-battery-sensors,no-sudo,no-pip-install,pipx,python-prefix-dir:,effective-installation-dir:,help
-+LONG=remove,dest-dir:,prefix-dir:,sysconf-dir:,no-ectool,no-pre-uninstall,no-post-install,no-battery-sensors,no-sudo,no-pip-install,no-pip-build,pipx,python-prefix-dir:,effective-installation-dir:,help
+-LONG=remove,dest-dir:,prefix-dir:,sysconf-dir:,no-ectool,no-pre-uninstall,no-post-install,no-sudo,no-pip-install,pipx,python-prefix-dir:,effective-installation-dir:,ignore-tool:,help
++LONG=remove,dest-dir:,prefix-dir:,sysconf-dir:,no-ectool,no-pre-uninstall,no-post-install,no-sudo,no-pip-install,no-pip-build,pipx,python-prefix-dir:,effective-installation-dir:,ignore-tool:,help
  VALID_ARGS=$(getopt -a --options $SHORT --longoptions $LONG -- "$@")
  if [[ $? -ne 0 ]]; then
      exit 1;
-@@ -22,6 +22,7 @@ SHOULD_REMOVE=false
- NO_BATTERY_SENSOR=false
+@@ -21,6 +21,7 @@ SHOULD_POST_INSTALL=true
+ SHOULD_REMOVE=false
  NO_SUDO=false
  NO_PIP_INSTALL=false
 +NO_PIP_BUILD=false
  PIPX=false
  PYTHON_PREFIX_DIRECTORY_OVERRIDE=
  EFFECTIVE_INSTALLATION_DIRECTORY_OVERRIDE=
-@@ -62,6 +63,10 @@ while true; do
+@@ -59,6 +60,10 @@ while true; do
      '--no-pip-install')
          NO_PIP_INSTALL=true
          ;;
@@ -51,7 +51,7 @@ index 44c5367..b1db7eb 100755
      '--pipx')
          PIPX=true
          ;;
-@@ -96,7 +101,7 @@ fi
+@@ -97,7 +102,7 @@ fi
  
  PYTHON_SCRIPT_INSTALLATION_PATH="$INSTALLATION_DIRECTORY/fw-fanctrl"
  
@@ -60,7 +60,7 @@ index 44c5367..b1db7eb 100755
      echo "Missing package 'python3'!"
      exit 1
  fi
-@@ -115,7 +120,7 @@ if [ "$PIPX" = true ]; then
+@@ -116,7 +121,7 @@ if [ "$PIPX" = true ]; then
      fi
  fi
  
@@ -69,7 +69,7 @@ index 44c5367..b1db7eb 100755
      if ! python3 -m build -h 1>/dev/null 2>&1; then
          echo "Missing python package 'build'!"
          exit 1
-@@ -232,7 +237,9 @@ function install() {
+@@ -224,7 +229,9 @@ function install() {
      fi
      mkdir -p "$DEST_DIR$SYSCONF_DIR/fw-fanctrl"
  
@@ -82,4 +82,3 @@ index 44c5367..b1db7eb 100755
          echo "installing python package"
 -- 
 2.43.0
-
