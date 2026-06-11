@@ -15,7 +15,10 @@ Summary:        Atuin - magical shell history
 
 License:        MIT
 URL:            https://crates.io/crates/atuin
-Source:         %{crates_source}
+# Use the CDN endpoint instead of %%{crates_source}: COPR builders get 403
+# from the crates.io API (User-Agent / data-access policy). Re-apply after
+# running rust2rpm, which regenerates the %%{crates_source} line.
+Source:         https://static.crates.io/crates/%{crate}/%{crate}-%{version}.crate
 Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.16.0-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
