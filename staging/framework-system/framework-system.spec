@@ -50,5 +50,3 @@ install -Dpm 0644 framework_tool/completions/fish/%{bin_name}.fish -t %{buildroo
 
 %changelog
 %autochangelog
-
-

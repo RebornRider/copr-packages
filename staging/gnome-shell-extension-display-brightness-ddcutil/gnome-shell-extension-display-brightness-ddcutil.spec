@@ -7,11 +7,10 @@
 # renovate: datasource=github-releases depName=daitj/gnome-display-brightness-ddcutil
 %global commit      a177b94d635a1641ba9de625c923f959800047f5
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-gnome-display-brightness-ddcutil
 Version:     59.0.0
-Release:     4%{gitrel}%{?dist}
+Release:     %autorelease -b 5 -s git%{shortcommit}
 Summary:     Display brightness slider for gnome shell using ddcutil backend
 
 License:     GPL-3.0-only
@@ -32,7 +31,7 @@ Display brightness slider for gnome shell using ddcutil backend
 %autosetup -n gnome-display-brightness-ddcutil-%{commit} -N
 
 %build
-make build 
+make build
 
 %install
 mkdir -p %{buildroot}%{extdir}
@@ -40,7 +39,7 @@ unzip -q dist/%{extuuid}.shell-extension.zip -d %{buildroot}%{extdir}/
 
 mkdir -p %{buildroot}%{gschemadir}
 %{__mv} -f %{buildroot}%{extdir}/schemas/%{gschemafile} -t %{buildroot}%{gschemadir}/
-    
+
 # Cleanup crap.
 %{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas,locale}
 

@@ -6,11 +6,10 @@
 %global commit      54c140399bbc3e6a3dce6c9f842727c4128367be
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global commit_date 20221204
-%global gitrel      .%{commit_date}.git%{shortcommit}
 
 Name:           fw-ectool
-Version:        v0.3.3
-Release:        5%{gitrel}%{?dist}
+Version:        0.3.3
+Release:        %autorelease -b 6 -s %{commit_date}.git%{shortcommit}
 Summary:        A tool for interacting with the embedded controller on a Framework laptop
 
 License:        BSD-3-Clause

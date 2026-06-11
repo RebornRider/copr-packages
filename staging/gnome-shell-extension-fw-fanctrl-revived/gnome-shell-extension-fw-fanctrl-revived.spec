@@ -7,11 +7,10 @@
 # renovate: datasource=github-releases depName=ghostdevv/fw-fanctrl-revived-gnome-shell-extension
 %global commit      c2fbf1ee07034189b601b51185ccb255052be043
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-fw-fanctrl-revived
 Version:     8.0.0
-Release:     3%{gitrel}%{?dist}
+Release:     %autorelease -b 4 -s git%{shortcommit}
 Summary:     A Gnome extension that controls your framework laptop fan profile
 
 License:     MIT

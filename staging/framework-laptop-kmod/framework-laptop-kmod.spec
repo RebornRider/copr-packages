@@ -7,11 +7,12 @@
 
 %global commit      6164bc3dec24b6bb2806eedd269df6a170bcc930
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitrel      .git%{shortcommit}
 
 Name:           %{real_name}-kmod
-Version:        %autorelease
-Release:        2%{gitrel}%{?dist}
+# Upstream has no version tags; stay at 1 (previously published version) so
+# upgrades keep working without an Epoch.
+Version:        1
+Release:        %autorelease -b 3 -s git%{shortcommit}
 Summary:        Kernel module to expose more Framework Laptop stuff
 License:        GPL-2.0-only
 URL:            https://github.com/DHowett/framework-laptop-kmod

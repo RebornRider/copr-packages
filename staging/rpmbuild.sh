@@ -27,7 +27,7 @@ shopt -s nullglob
 cd -P -- "$(readlink -e "$(dirname "$0")")"
 
 USER="${USER:-$(id -un)}"
-HOME="${HOME:-$(getent passwd "$USER" | cut -d: -f7)}"
+HOME="${HOME:-$(getent passwd "$USER" | cut -d: -f6)}"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 usage() {
@@ -94,6 +94,8 @@ spec_files=("$PACKAGE/"*"$PACKAGE.spec")
 if (( ${#spec_files[@]} == 0 )); then
 	echo "rpmbuild.sh: No spec file found matching $PACKAGE/*$PACKAGE.spec" >&2
 	exit 1
+elif (( ${#spec_files[@]} > 1 )); then
+	echo "rpmbuild.sh: Multiple spec files match, using ${spec_files[0]}" >&2
 fi
 cp "${spec_files[0]}" "$SPECDIR/$PACKAGE.spec"
 

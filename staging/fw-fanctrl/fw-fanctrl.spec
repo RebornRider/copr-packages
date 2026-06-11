@@ -2,7 +2,7 @@
 
 Name:           fw-fanctrl
 Version:        1.1.0
-Release:        1%{?dist}
+Release:        %autorelease
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause

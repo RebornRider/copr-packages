@@ -7,11 +7,10 @@
 # renovate: datasource=github-releases depName=diegodario88/quake-terminal
 %global commit      352093eba93c2cbf2addb7c086ba745f6c8e7e9f
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global gitrel      .git%{shortcommit}
 
 Name:        gnome-shell-extension-quake-terminal
 Version:     1.1.0
-Release:     4%{gitrel}%{?dist}
+Release:     %autorelease -b 5 -s git%{shortcommit}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
 License:     GPL-3.0-only
@@ -31,7 +30,7 @@ Quickly launch a terminal in Quake mode using a keyboard shortcut
 %autosetup -n quake-terminal-%{commit} -N
 
 %build
-make compile 
+make compile
 
 %install
 make pack
@@ -41,7 +40,7 @@ unzip -q %{extuuid}.shell-extension.zip -d %{buildroot}%{extdir}/
 
 mkdir -p %{buildroot}%{gschemadir}
 %{__mv} -f %{buildroot}%{extdir}/schemas/%{gschemafile} -t %{buildroot}%{gschemadir}/
-    
+
 # Cleanup crap.
 %{__rm} -fr %{buildroot}%{extdir}/{LICENSE*,README*,schemas,locale}
 

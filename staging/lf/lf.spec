@@ -74,7 +74,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 %license %{golicenses}
 %dir %{_pkgdocdir}
 %doc %{_pkgdocdir}/*
-%doc %{_mandir}/man1/{%name}.1*
+%doc %{_mandir}/man1/%{name}.1*
 %{_bindir}/%{name}
 # directories provides by 'filesystem' and 'setup'
 %{_datadir}/applications/%{name}.desktop
