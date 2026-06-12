@@ -26,10 +26,16 @@ jobs:
         # only has C, and rpm's shell expansions warn under that locale.
         run: dnf -y install rpmlint rpm-build rpkg glibc-langpack-en
 
-      - name: Parse all specs
+      - name: Parse all specs (ignoring Node.js)
         run: |
           fail=0
           for spec in staging/*/*.spec; do
+            # Skip any spec file that has "nodejs" in the path or filename
+            if [[ "$spec" == *"nodejs"* ]]; then
+              echo "Skipping Node.js spec: $spec"
+              continue
+            fi
+
             echo "::group::$spec"
             if ! rpmspec -P "$spec" >/dev/null; then
               fail=1

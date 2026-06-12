@@ -139,8 +139,8 @@ Provides:   nodejs(engine) = %{node_version}
 Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/node-v%{node_version}-stripped.tar.gz
 # Sources 001-099: reserved for additional sources to be installed
 # - Full ICU database data
-Source001:      https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/icu4c-78.3-data-bin-b.zip
-Source002:      https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/icu4c-78.3-data-bin-l.zip
+Source001:      https://github.com/unicode-org/icu/releases/download/release-%{icu_version_major}.%{icu_version_minor}/icu4c-%{icu_version_major}.%{icu_version_minor}-data-bin-b.zip
+Source002:      https://github.com/unicode-org/icu/releases/download/release-%{icu_version_major}.%{icu_version_minor}/icu4c-%{icu_version_major}.%{icu_version_minor}-data-bin-l.zip
 # - Downstream/distribution configuration files
 Source003:      nodejs.pc.in
 Source004:      v8.pc.in
