@@ -9,3 +9,5 @@
 # upstream test suite, or the test suite requires network/hardware that mock
 # can't provide. We deliberately omit %check rather than ship an empty one.
 addFilter("no-%check-section")
+
+addFilter("nodejs26.spec.*use-of-RPM_SOURCE_DIR")
