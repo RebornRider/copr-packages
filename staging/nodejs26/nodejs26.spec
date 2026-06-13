@@ -1,4 +1,5 @@
 Name:           nodejs26
+Epoch:          1
 Version:        26.1.0
 Release:        %{autorelease}
 
