@@ -1,5 +1,4 @@
 Name:           nodejs26
-Epoch:          1
 Version:        26.1.0
 Release:        %{autorelease}
 
@@ -26,6 +25,11 @@ URL:            https://nodejs.org
 # BEGIN automatic-version-macros  # DO NOT REMOVE THIS LINE!
 # Version from node-v26.1.0/src/node_version.h
 %global node_soversion 147
+
+# Force bundled libuv on Fedora 44 because system libuv < 1.52.0 lacks f_frsize
+%if 0%{?fedora} == 44
+%global with_bundled_libuv 1
+%endif
 
 # Version from node-v26.1.0/deps/ada/ada.h
 %nodejs_define_version ada 3.4.4
