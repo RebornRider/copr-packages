@@ -31,7 +31,7 @@ update: ${SPECFILE} packaging/fill-versions.sh
 	${MAKE} node-v${TARGET_VERSION}-stripped.tar.gz
 	packaging/fill-versions.sh '${SPECFILE}' node-v${TARGET_VERSION}-stripped.tar.gz
 	${GIT} add '${SPECFILE}'
-	#${MAKE} sources
+	${MAKE} sources
 
 # Remove all downloaded and/or created files
 clean:
