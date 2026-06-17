@@ -10,7 +10,6 @@
 %forgemeta
 
 Name:           lyrebird
-Epoch:          1
 Version:        0.8.1
 Release:        %autorelease -b 1 -s git%{shortcommit}
 Summary:        Tor pluggable transport
