@@ -11,7 +11,7 @@
 
 Name:           lyrebird
 Version:        0.8.1
-Release:        %autorelease -b 1 -s git%{shortcommit}
+Release:        %autorelease -b 2
 Summary:        Tor pluggable transport
 # LICENSE is BSD-2-Clause (Tor/Yawning Angel) AND BSD-3-Clause (Go Authors);
 # LICENSE-GPL3.txt covers bundled GPLv3 code.
