@@ -1,7 +1,6 @@
 %global forgeurl https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird
-%global version %(date +%Y%m%d)
 %global commit fc105a03c0e0acc2479301c361c012ffed359c43
-%global _forgeversionsuffix %{scm}%(printf %.7s %{commit})
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global source_date_epoch_from_changelog 0
 %global debug_package %{nil}
 # Required: %%gobuild exports GO111MODULE from this macro. Without it the macro
@@ -11,8 +10,9 @@
 %forgemeta
 
 Name:           lyrebird
-Version:        %{forgeversion}
-Release:        %{autorelease}
+Epoch:          1
+Version:        0.8.1
+Release:        %autorelease -b 1 -s git%{shortcommit}
 Summary:        Tor pluggable transport
 # LICENSE is BSD-2-Clause (Tor/Yawning Angel) AND BSD-3-Clause (Go Authors);
 # LICENSE-GPL3.txt covers bundled GPLv3 code.
@@ -38,6 +38,7 @@ WebTunnel client.
 # "direct" is required to resolve the utls "replace" fork hosted on the Tor
 # GitLab, which proxy.golang.org will not serve.
 export GOPROXY="https://proxy.golang.org,direct"
+export LDFLAGS="$LDFLAGS -X main.lyrebirdVersion=%{version}"
 %gobuild -o %{name} ./cmd/%{name}
 
 %install
