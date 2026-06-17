@@ -4,6 +4,10 @@
 %global _forgeversionsuffix %{scm}%(printf %.7s %{commit})
 %global source_date_epoch_from_changelog 0
 %global debug_package %{nil}
+# Required: %%gobuild exports GO111MODULE from this macro. Without it the macro
+# falls back to GO111MODULE=off, forcing GOPATH mode and breaking dependency
+# resolution for this module-based build.
+%global gomodulesmode GO111MODULE=on
 %forgemeta
 
 Name:           lyrebird
