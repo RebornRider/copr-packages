@@ -37,7 +37,7 @@ update: ${SPECFILE} packaging/fill-versions.sh
 clean:
 	$(RM) -r node-v*-stripped.tar.gz node-v*/  # main archive and it's expanded contents
 	$(RM) icu4c-*-data-bin-?.zip               # ICU database
-	$(RM) packaging-scripts.tar.gz             # packaging tarball
+	$(RM) node-v*-packaging-scripts.tar.gz     # packaging tarball
 
 # === Recipes for concrete files ===
 
@@ -51,5 +51,5 @@ node-v%-stripped.tar.gz: packaging/make-nodejs-tarball.sh
 icu4c-%-data-bin-b.zip icu4c-%-data-bin-l.zip &: ${SPECFILE}
 	${SPECTOOL} --get-files --source 1,2 $<
 
-packaging-scripts.tar.gz: ${PACKAGING}
+node-v%-packaging-scripts.tar.gz: ${PACKAGING}
 	${TAR} -czf $@ $^
