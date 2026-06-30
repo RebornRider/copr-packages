@@ -5,11 +5,11 @@
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=diegodario88/quake-terminal
-%global commit      352093eba93c2cbf2addb7c086ba745f6c8e7e9f
+%global commit      4213b664837b94d0985960e38eacbd2fdad5c112
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:        gnome-shell-extension-quake-terminal
-Version:     1.1.0
+Version:     1.2.4
 Release:     %autorelease -b 5 -s git%{shortcommit}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
