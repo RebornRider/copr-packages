@@ -15,12 +15,19 @@ The earlier --no-override-python-installation-path flag is no longer
 needed: the new --effective-installation-dir (added upstream) already
 lets the caller pin PYTHON_SCRIPT_INSTALLATION_PATH to /usr/bin/fw-fanctrl
 without leaking %{buildroot} into the systemd units.
+
+Rebased onto main @ 4ca85b3 ("Fix decimal config validation for
+temperature thresholds (#192)"), which includes the Fedora
+Atomic/Silverblue install.sh rework (#177): the pip/pipx presence
+checks are now nested under NO_PIP_INSTALL, and the new pipx
+shebang warning added by #177 is likewise skipped when
+--no-pip-build (which implies --no-pip-install) is used.
 ---
- install.sh | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ install.sh | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
 diff --git a/install.sh b/install.sh
-index f2a0ffd..0a3c0ef 100644
+index 55eda18..773b7cb 100644
 --- a/install.sh
 +++ b/install.sh
 @@ -3,7 +3,7 @@ set -e
@@ -60,7 +67,7 @@ index f2a0ffd..0a3c0ef 100644
      echo "Missing package 'python3'!"
      exit 1
  fi
-@@ -116,7 +121,7 @@ if [ "$PIPX" = true ]; then
+@@ -116,7 +121,7 @@ if [ "$NO_PIP_INSTALL" = false ]; then
      fi
  fi
  

@@ -1,20 +1,29 @@
 %global debug_package %{nil}
 
+# main @ 2026-07-08: "Fix decimal config validation for temperature thresholds (#192)"
+%global commit          4ca85b3a8157951ddaf2496917de65fd542e7952
+%global shortcommit     %(c=%{commit}; echo ${c:0:7})
+%global snapshotdate    20260708
+
 Name:           fw-fanctrl
-Version:        1.1.0
+# Post-release snapshot of main (v1.1.0 + #195, #177, #192)
+Version:        1.1.0^%{snapshotdate}git%{shortcommit}
 Release:        %autorelease
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause
 BuildArch:      noarch
 URL:            https://github.com/TamtamHero/%{name}
-Source0:        https://github.com/TamtamHero/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{commit}/%{name}-%{commit}.tar.gz
 
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  python3-devel
 BuildRequires:  python3-pip
 BuildRequires:  python3dist(setuptools)
 BuildRequires:  python3dist(wheel)
+# for the upstream test suite (tests/ added in #192)
+BuildRequires:  python3dist(pytest)
+BuildRequires:  python3dist(jsonschema)
 Requires:       python3
 Requires:       %{_bindir}/framework_tool
 
@@ -29,7 +38,7 @@ laptops using configurable temperature strategies. It runs
 as a systemd service and supports runtime strategy switching.
 
 %prep
-%autosetup -n %{name}-%{version} -p1
+%autosetup -n %{name}-%{commit} -p1
 
 %build
 %pyproject_wheel
@@ -47,6 +56,9 @@ as a systemd service and supports runtime strategy switching.
 rm -f %{buildroot}%{_sysconfdir}/%{name}/config.schema.json
 
 install -D -m 0644 %{SOURCE1} %{buildroot}%{_udevrulesdir}/99-fw-fanctrl.rules
+
+%check
+%pytest
 
 %post
 %systemd_post %{name}.service %{name}-suspend.service
