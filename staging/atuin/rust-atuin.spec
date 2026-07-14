@@ -9,7 +9,7 @@
 %global crate atuin
 
 Name:           rust-atuin
-Version:        18.17.0
+Version:        18.17.1
 Release:        %autorelease
 Summary:        Atuin - magical shell history
 
@@ -19,7 +19,7 @@ URL:            https://crates.io/crates/atuin
 # from the crates.io API (User-Agent / data-access policy). Re-apply after
 # running rust2rpm, which regenerates the %%{crates_source} line.
 Source:         https://static.crates.io/crates/%{crate}/%{crate}-%{version}.crate
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.17.0-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.17.1-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
 
