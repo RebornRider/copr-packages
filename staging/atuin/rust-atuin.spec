@@ -20,8 +20,15 @@ URL:            https://crates.io/crates/atuin
 # running rust2rpm, which regenerates the %%{crates_source} line.
 Source:         https://static.crates.io/crates/%{crate}/%{crate}-%{version}.crate
 Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.18.0-vendor.tar.xz
+# Upstream vendors bash-preexec at <repo-root>/vendor/bash-preexec/ and embeds
+# it with include_str!("../../../vendor/..."). That path is outside the cargo
+# package root, so it is absent from the .crate and the build fails. Fetch it
+# from the matching upstream tag; see atuin-fix-bash-preexec-path.diff.
+Source:         https://raw.githubusercontent.com/atuinsh/atuin/v%{version}/vendor/bash-preexec/bash-preexec.sh
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
+# Point the bash-preexec include at the path we populate in %%prep
+Patch:          atuin-fix-bash-preexec-path.diff
 
 BuildRequires:  cargo-rpm-macros >= 26
 
@@ -53,6 +60,10 @@ License:        ((Apache-2.0 OR MIT) AND BSD-3-Clause) AND (0BSD OR MIT OR Apach
 
 %prep
 %autosetup -n %{crate}-%{version} -p1 -a1
+# Supply the vendored bash-preexec that is missing from the .crate. Kept out of
+# vendor/, which is the cargo-vendor directory managed by %%cargo_prep.
+mkdir -p bash-preexec
+cp -p %{SOURCE2} bash-preexec/bash-preexec.sh
 %cargo_prep -v vendor
 
 %build

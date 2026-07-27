@@ -1,0 +1,24 @@
+Fix the vendored bash-preexec include path for the crates.io tarball
+
+Upstream keeps bash-preexec at <repo-root>/vendor/bash-preexec/, i.e. three
+levels above crates/atuin/src/. The published .crate is flattened to
+atuin-<version>/src/, so the relative path escapes the extracted tree and
+the include_str! fails. We install the script at <crate-root>/bash-preexec/
+in %prep instead (not vendor/, which belongs to cargo-vendor) and point the
+macro at it.
+
+Not suitable for upstream: upstream should relocate the script under
+crates/atuin/ or emit it into OUT_DIR from a build script so that builds
+from crates.io work at all.
+
+--- a/src/shell.rs
++++ b/src/shell.rs
+@@ -19,7 +19,7 @@
+ pub const BASH: Bash<'_> = Bash {
+     include_guard: include_shell!("atuin.bash.d/include-guard.bash"),
+     main: include_shell!("atuin.bash"),
+-    preexec: include_trimmed!("../../../vendor/bash-preexec/bash-preexec.sh"),
++    preexec: include_trimmed!("../bash-preexec/bash-preexec.sh"),
+ };
+ 
+ pub const FISH: &str = include_shell!("atuin.fish");
