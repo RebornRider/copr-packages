@@ -1,6 +1,6 @@
---- atuin-18.18.0/Cargo.toml	2006-07-24T01:21:28+00:00
-+++ atuin-18.18.0/Cargo.toml	2026-07-27T19:00:25.353478+00:00
-@@ -310,11 +310,6 @@
+--- atuin-18.18.1/Cargo.toml	2006-07-24T01:21:28+00:00
++++ atuin-18.18.1/Cargo.toml	2026-07-28T09:29:02.140038+00:00
+@@ -311,11 +311,6 @@
  [target.'cfg(any(target_os = "linux", target_os = "macos"))'.dependencies.tree-sitter-fish]
  version = "3.6.0"
  
@@ -12,7 +12,7 @@
  [target.'cfg(target_os = "linux")'.dependencies.arboard]
  version = "3.4"
  features = ["wayland-data-control"]
-@@ -324,6 +319,3 @@
+@@ -325,6 +320,3 @@
  [target."cfg(unix)".dependencies.daemonize]
  version = "0.5.0"
  
