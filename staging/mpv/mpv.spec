@@ -2,7 +2,7 @@
 
 Name:           mpv
 Version:        0.41.0
-Release:        9%{?dist}
+Release:        10%{?dist}
 Epoch:          2
 
 # overall license is GPL-2.0-or-later and LGPL-2.1-or-later
@@ -36,6 +36,17 @@ License:        GPL-2.0-or-later AND LGPL-2.1-or-later AND BSD-2-Clause AND BSD-
 Summary:        Movie player playing most video formats and DVDs
 URL:            https://%{name}.io/
 Source0:        https://github.com/%{name}-player/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+
+# Only applied on Fedora 45+, see %%prep. Declared unconditionally so the patches
+# always end up in the srpm, whichever release it happens to be built on.
+# Switch to runtime loading of libvsscript with VapourSynth R74+
+# https://github.com/mpv-player/mpv/commit/75b2ccfeb1ce4ed5a40ac9860fa74f3d1265e13f
+Patch1:         mpv-vapoursynth-r74.patch
+# Fix build with VapourSynth < R74
+# https://github.com/mpv-player/mpv/commit/44a9b03f244f24e0ea443370cf2cfae0da5767f9
+Patch2:         mpv-vapoursynth-rtld-global.patch
+# Load versioned libvsscript.so
+Patch3:         mpv-vapoursynth-soname.patch
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
@@ -82,7 +93,13 @@ BuildRequires:  pkgconfig(openal)
 BuildRequires:  pkgconfig(rubberband)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(uchardet)
+%if 0%{?fedora} >= 45
+# Only the headers are used; the library itself is loaded at runtime. The
+# vapoursynth-script module this used to need as well is gone since R79.
+BuildRequires:  pkgconfig(vapoursynth) >= 56
+%else
 BuildRequires:  pkgconfig(vapoursynth)
+%endif
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
@@ -94,6 +111,10 @@ BuildRequires:  pkgconfig(zimg) >= 2.9
 BuildRequires:  pkgconfig(zlib)
 
 Requires:       hicolor-icon-theme
+%if 0%{?fedora} >= 45
+# Loading VapourSynth at runtime leaves no linkage for RPM to pick up on.
+Requires:       vapoursynth-libs%{?_isa}
+%endif
 Provides:       mplayer-backend = %{?epoch:%{epoch}:}%{version}-%{release}
 Suggests:       yt-dlp
 
@@ -122,6 +143,10 @@ a library and facilitate easy integration into other applications.
 
 %package libs
 Summary: Dynamic library for Mpv frontends
+%if 0%{?fedora} >= 45
+# Loading VapourSynth at runtime leaves no linkage for RPM to pick up on.
+Requires: vapoursynth-libs%{?_isa}
+%endif
 Suggests: yt-dlp
 
 %description libs
@@ -137,7 +162,12 @@ Requires: %{name}-libs%{?_isa} = %{?epoch:%{epoch}:}%{version}-%{release}
 This package contains development header files and libraries for Mpv.
 
 %prep
-%autosetup -p1
+%autosetup -N
+# Fedora 44 ships VapourSynth R72, which still provides vapoursynth-script and
+# builds unpatched. The runtime-loading patches are only needed from R74 (F45+) on.
+%if 0%{?fedora} >= 45
+%autopatch -p1
+%endif
 sed -e "s|/usr/local/etc|%{_sysconfdir}/%{name}|" -i etc/%{name}.conf
 
 %build

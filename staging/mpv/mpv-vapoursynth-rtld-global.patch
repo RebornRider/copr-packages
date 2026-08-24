@@ -1,0 +1,38 @@
+From 44a9b03f244f24e0ea443370cf2cfae0da5767f9 Mon Sep 17 00:00:00 2001
+From: Chainik <chainik.dn@gmail.com>
+Date: Sun, 31 May 2026 14:51:37 +0300
+Subject: [PATCH] vf_vapoursynth: improve backward compatibility
+
+The previous commit to dynamically load VapourSynth R74 would fail to work
+for VapourSynth R73 and before on Linux due to load mode RTLD_LOCAL. To
+make it work on all VapourSynth version, switch to use RTLD_GLOBAL mode.
+---
+ osdep/io.h                    | 1 +
+ video/filter/vf_vapoursynth.c | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/osdep/io.h b/osdep/io.h
+index bf672224e78a7..1ab7a7f248020 100644
+--- a/osdep/io.h
++++ b/osdep/io.h
+@@ -207,6 +207,7 @@ void mp_globfree(mp_glob_t *pglob);
+ 
+ #define RTLD_NOW 0
+ #define RTLD_LOCAL 0
++#define RTLD_GLOBAL 0
+ #define dlopen(fn,fg) mp_dlopen((fn), (fg))
+ #define dlsym(h,s) mp_dlsym((h), (s))
+ #define dlerror mp_dlerror
+diff --git a/video/filter/vf_vapoursynth.c b/video/filter/vf_vapoursynth.c
+index 22bfa646581e9..79b52dbc4baa1 100644
+--- a/video/filter/vf_vapoursynth.c
++++ b/video/filter/vf_vapoursynth.c
+@@ -817,7 +817,7 @@ static const m_option_t vf_opts_fields[] = {
+ static int drv_vss_init(struct priv *p)
+ {
+     const char *vsscript_path = getenv("VSSCRIPT_PATH");
+-    const int dl_mode = RTLD_NOW | RTLD_LOCAL;
++    const int dl_mode = RTLD_NOW | RTLD_GLOBAL;
+     void *vsscript_lib = NULL;
+ 
+     if (vsscript_path) {

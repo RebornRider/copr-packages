@@ -1,0 +1,34 @@
+From 3f76586228d6acdd76f912b8f3926beec6a0318a Mon Sep 17 00:00:00 2001
+From: rpm-build <rpm-build>
+Date: Mon, 10 Aug 2026 15:39:32 +0200
+Subject: [PATCH] vf_vapoursynth: dlopen the versioned soname
+
+The unversioned libvsscript.so is the linker name. Distributions ship it in
+their development package, so dlopen()ing it only succeeds where that package
+happens to be installed and the filter fails at first use otherwise. The
+runtime package is the one carrying the soname, so ask for that instead.
+
+The legacy libvapoursynth-script name, kept for VapourSynth R73 and older, is
+split the same way and gets the same treatment.
+---
+ video/filter/vf_vapoursynth.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/video/filter/vf_vapoursynth.c b/video/filter/vf_vapoursynth.c
+index 79b52db..672aa7a 100644
+--- a/video/filter/vf_vapoursynth.c
++++ b/video/filter/vf_vapoursynth.c
+@@ -49,8 +49,8 @@ static const char *const vsscript_lib_names[] = {
+     "libvsscript.dylib",
+     "libvapoursynth-script.dylib",
+ #else
+-    "libvsscript.so",
+-    "libvapoursynth-script.so",
++    "libvsscript.so.0",
++    "libvapoursynth-script.so.0",
+ #endif
+ };
+ 
+-- 
+2.55.0
+
