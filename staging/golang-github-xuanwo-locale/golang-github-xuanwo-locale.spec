@@ -17,7 +17,7 @@ Cross platform locale detection for Golang.}
 %global godocs          CHANGELOG.md README.md
 
 Name:           golang-github-xuanwo-locale
-Release:        %autorelease -e 1
+Release:        %autorelease -e 2
 Summary:        Cross platform locale detection for Golang
 
 License:        Apache-2.0

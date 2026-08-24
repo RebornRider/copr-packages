@@ -10,7 +10,7 @@
 
 Name:        gnome-shell-extension-fw-fanctrl-revived
 Version:     8.0.0
-Release:     %autorelease -b 4 -s git%{shortcommit}
+Release:     %autorelease -b 5 -s git%{shortcommit}
 Summary:     A Gnome extension that controls your framework laptop fan profile
 
 License:     MIT

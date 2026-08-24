@@ -10,7 +10,7 @@
 
 Name:        gnome-shell-extension-gnome-clipboard-history
 Version:     1.4.7
-Release:     %autorelease -b 6 -s git%{shortcommit}
+Release:     %autorelease -b 7 -s git%{shortcommit}
 Summary:     a clipboard manager for GNOME
 
 License:     MIT

@@ -8,7 +8,7 @@
 
 Name:        gnome-shell-extension-instant-workspace-switcher
 Version:     0.0.0
-Release:     %autorelease -b 14 -s git%{shortcommit}
+Release:     %autorelease -b 15 -s git%{shortcommit}
 Summary:     Disables the workspace switch animation
 
 License:     GPL-2.0-only

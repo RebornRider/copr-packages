@@ -10,7 +10,7 @@
 
 Name:        gnome-shell-extension-gnome-display-brightness-ddcutil
 Version:     59.0.0
-Release:     %autorelease -b 5 -s git%{shortcommit}
+Release:     %autorelease -b 6 -s git%{shortcommit}
 Summary:     Display brightness slider for gnome shell using ddcutil backend
 
 License:     GPL-3.0-only

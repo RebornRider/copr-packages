@@ -8,7 +8,7 @@
 Name:           fw-fanctrl
 # Post-release snapshot of main (v1.1.0 + #195, #177, #192)
 Version:        1.1.0^%{snapshotdate}git%{shortcommit}
-Release:        %autorelease
+Release:        %autorelease -e 1
 Summary:        Framework FanControl Software
 
 License:        BSD-3-Clause

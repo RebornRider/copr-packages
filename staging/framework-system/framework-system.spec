@@ -3,7 +3,7 @@
 
 Name:    framework-system
 Version: 0.6.5
-Release: %autorelease -e 1
+Release: %autorelease -e 2
 Summary: Rust tool to interact with the Framework Computer systems
 # Main package is BSD-3-Clause, remaining licenses are from statically linked dependencies
 License: BSD-3-Clause AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (MIT) AND (MPL-2.0) AND (Unlicense OR MIT)

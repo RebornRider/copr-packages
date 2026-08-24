@@ -17,7 +17,7 @@ golang file times (atime, mtime, ctime, btime).}
 %global godocs          example README.md
 
 Name:           golang-github-djherbis-times
-Release:        %autorelease -e 1
+Release:        %autorelease -e 2
 Summary:        golang file times (atime, mtime, ctime, btime)
 
 License:        MIT
