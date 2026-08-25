@@ -9,8 +9,8 @@
 %global crate atuin
 
 Name:           rust-atuin
-Version:        18.19.0
-Release:        %autorelease -e 2
+Version:        18.20.0
+Release:        %autorelease -e 1
 Summary:        Atuin - magical shell history
 
 License:        MIT
@@ -19,7 +19,7 @@ URL:            https://crates.io/crates/atuin
 # from the crates.io API (User-Agent / data-access policy). Re-apply after
 # running rust2rpm, which regenerates the %%{crates_source} line.
 Source:         https://static.crates.io/crates/%{crate}/%{crate}-%{version}.crate
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.19.0-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/atuin-18.20.0-vendor.tar.xz
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          atuin-fix-metadata-auto.diff
 
@@ -57,9 +57,9 @@ License:        ((Apache-2.0 OR MIT) AND BSD-3-Clause) AND (0BSD OR MIT OR Apach
 %cargo_prep -v vendor
 
 %build
-%cargo_build
-%{cargo_license_summary}
-%{cargo_license} > LICENSE.dependencies
+%cargo_build -f client,clipboard,daemon
+%{cargo_license_summary -f client,clipboard,daemon}
+%{cargo_license -f client,clipboard,daemon} > LICENSE.dependencies
 %{cargo_vendor_manifest}
 # generate completions
 target/release/%{crate} gen-completions -s bash -o .
@@ -67,7 +67,7 @@ target/release/%{crate} gen-completions -s zsh -o .
 target/release/%{crate} gen-completions -s fish -o .
 
 %install
-%cargo_install
+%cargo_install -f client,clipboard,daemon
 # install shell completions
 install -Dpm0644 %{crate}.bash \
     %{buildroot}/%{bash_completions_dir}/%{crate}.bash
@@ -82,7 +82,7 @@ install -Dpm0644 _%{crate} \
 # * failing without internet
 # * failing without internet
 # * failing without internet
-%{cargo_test -- --bins -- %{shrink:
+%{cargo_test -f client,clipboard,daemon -- --bins -- %{shrink:
     --skip multi_user_test
     --skip registration
     --skip change_password

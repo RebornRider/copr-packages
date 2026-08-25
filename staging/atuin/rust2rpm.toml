@@ -5,8 +5,9 @@ extra-files = [
     "%{fish_completions_dir}/%{crate}.fish",
 ]
 
-#[features]
-#enable-all = true
+[features]
+enable-all = false
+enable = ["client", "daemon", "clipboard"]
 
 [tests]
 run = [
