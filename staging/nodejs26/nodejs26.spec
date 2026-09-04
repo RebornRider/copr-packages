@@ -1,7 +1,7 @@
 Name:           nodejs26
 Epoch:          1
 Version:        26.8.1
-Release:        %{autorelease -e 1}
+Release:        %{autorelease -e 2}
 
 Summary:        JavaScript runtime
 License:        Apache-2.0 AND Artistic-2.0 AND BSD-2-Clause AND BSD-3-Clause AND BlueOak-1.0.0 AND CC-BY-3.0 AND CC0-1.0 AND ISC AND MIT

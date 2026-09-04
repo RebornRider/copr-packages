@@ -18,8 +18,8 @@ Signed-off-by: rpm-build <rpm-build>
 ---
  lib/crypto.js             | 10 ++++++++++
  lib/internal/errors.js    |  6 ++++++
- src/crypto/crypto_util.cc |  2 ++
- 3 files changed, 18 insertions(+)
+ src/crypto/crypto_util.cc |  4 ++++
+ 3 files changed, 20 insertions(+)
 
 diff --git a/lib/crypto.js b/lib/crypto.js
 index 4290989..1e647a9 100644
@@ -35,7 +35,7 @@ index 4290989..1e647a9 100644
    ERR_CRYPTO_FIPS_FORCED,
    ERR_WORKER_UNSUPPORTED_OPERATION,
  } = require('internal/errors').codes;
-@@ -253,6 +256,13 @@ function getFips() {
+@@ -255,6 +258,13 @@ function getFips() {
  }
  
  function setFips(val) {
@@ -53,11 +53,11 @@ diff --git a/lib/internal/errors.js b/lib/internal/errors.js
 index e6dfbc2..73f3f5a 100644
 --- a/lib/internal/errors.js
 +++ b/lib/internal/errors.js
-@@ -1113,6 +1113,12 @@ module.exports = {
+@@ -1127,6 +1127,12 @@ module.exports = {
  //
  // Note: Node.js specific errors must begin with the prefix ERR_
  
-+// insert RHEL specific erro
++// insert RHEL specific error
 +E('ERR_CRYPTO_FIPS_SYSTEM_CONTROLLED',
 +  'Cannot set FIPS mode. FIPS should be enabled/disabled at system level. See' +
 +  'https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/security_hardening/assembly_installing-the-system-in-fips-mode_security-hardening for more details.\n',
@@ -70,15 +70,17 @@ diff --git a/src/crypto/crypto_util.cc b/src/crypto/crypto_util.cc
 index 205e248..dcf2bf3 100644
 --- a/src/crypto/crypto_util.cc
 +++ b/src/crypto/crypto_util.cc
-@@ -86,6 +86,8 @@ bool ProcessFipsOptions() {
-   /* Override FIPS settings in configuration file, if needed. */
-   if (per_process::cli_options->enable_fips_crypto ||
-       per_process::cli_options->force_fips_crypto) {
-+      fprintf(stderr, "ERROR: Using options related to FIPS is not recommended, configure FIPS in openssl instead. See https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/security_hardening/assembly_installing-the-system-in-fips-mode_security-hardening for more details.\n");
-+      return false;
+@@ -102,8 +102,12 @@ std::optional<std::string> ProcessFipsOptions() {
+   const bool enable_fips = per_process::cli_options->enable_fips_crypto;
+   const bool force_fips = per_process::cli_options->force_fips_crypto;
+   if (!enable_fips && !force_fips) return std::nullopt;
+ 
++  return "ERROR: Using options related to FIPS is not recommended, configure "
++         "FIPS in openssl instead. See https://access.redhat.com/documentation"
++         "/en-us/red_hat_enterprise_linux/9/html/security_hardening/assembly_"
++         "installing-the-system-in-fips-mode_security-hardening for more details.";
  #if OPENSSL_VERSION_MAJOR >= 3
-     if (!ncrypto::testFipsEnabled()) return false;
-     return ncrypto::setFipsEnabled(true, nullptr);
+   // Whether FIPS-approved implementations are reachable is decided by the
+   // OpenSSL configuration, not by Node.js. Refuse to start rather than
 -- 
 2.53.0
-
