@@ -1,33 +1,34 @@
---- atuin-18.22.0/Cargo.toml	2006-07-24T01:21:28+00:00
-+++ atuin-18.22.0/Cargo.toml	2026-09-10T20:23:31.243708+00:00
-@@ -377,11 +377,6 @@
+--- atuin-18.23.0/Cargo.toml	2006-07-24T01:21:28+00:00
++++ atuin-18.23.0/Cargo.toml	2026-09-24T16:59:37.239091+00:00
+@@ -396,11 +396,6 @@
  [target.'cfg(any(target_os = "linux", target_os = "macos", target_os = "windows", target_os = "illumos"))'.dependencies.tree-sitter-powershell]
- version = "0.26.4"
+ version = "0.26"
  
 -[target.'cfg(any(target_os = "windows", target_os = "macos"))'.dependencies.arboard]
--version = "3.4"
+-version = "3"
 -optional = true
 -default-features = false
 -
  [target.'cfg(target_os = "linux")'.dependencies.arboard]
- version = "3.4"
+ version = "3"
  features = ["wayland-data-control"]
-@@ -398,14 +393,6 @@
+@@ -417,15 +412,6 @@
  
  [target."cfg(unix)".dev-dependencies.portable-pty]
  version = "0.9"
 -
 -[target."cfg(windows)".dependencies.windows-sys]
--version = "0.61.2"
+-version = "0.61"
 -features = [
 -    "Win32_System_Console",
 -    "Win32_System_Threading",
 -    "Win32_Foundation",
+-    "Win32_Storage_FileSystem",
 -]
  
  [lints.clippy]
  as_ptr_cast_mut = "warn"
-@@ -520,3 +507,4 @@
+@@ -540,3 +526,4 @@
  verbose_bit_mask = "warn"
  while_float = "warn"
  wildcard_imports = "warn"
