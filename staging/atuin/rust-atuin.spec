@@ -24,6 +24,7 @@ Source:         https://github.com/RebornRider/copr-packages/releases/download/s
 Patch:          atuin-fix-metadata-auto.diff
 
 BuildRequires:  cargo-rpm-macros >= 26
+BuildRequires:  pkgconfig(openssl)
 
 %global _description %{expand:
 Atuin - magical shell history.}
