@@ -9,8 +9,8 @@
 %global crate dysk
 
 Name:           rust-dysk
-Version:        3.6.1
-Release:        %autorelease -e 2
+Version:        3.7.1
+Release:        %autorelease -e 1
 Summary:        Give information on mounted filesystems
 
 License:        MIT
@@ -19,7 +19,7 @@ URL:            https://crates.io/crates/dysk
 # from the crates.io API (User-Agent / data-access policy). Re-apply after
 # running rust2rpm, which regenerates the %%{crates_source} line.
 Source:         https://static.crates.io/crates/%{crate}/%{crate}-%{version}.crate
-Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/dysk-3.6.1-vendor.tar.xz
+Source:         https://github.com/RebornRider/copr-packages/releases/download/source-artefacts/%{crate}-%{version}-vendor.tar.xz
 
 BuildRequires:  cargo-rpm-macros >= 26
 
