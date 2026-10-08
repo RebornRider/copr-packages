@@ -13,7 +13,7 @@
 %endif
 
 Name:       tor
-Version:    0.4.9.13
+Version:    0.4.9.14
 Release:    1%{?dist}
 License:    BSD-3-Clause
 Summary:    Anonymizing overlay network for TCP
