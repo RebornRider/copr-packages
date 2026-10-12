@@ -9,8 +9,8 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:        gnome-shell-extension-quake-terminal
-Version:     1.2.5
-Release:     %autorelease -b 3 -s git%{shortcommit}
+Version:     1.3.0
+Release:     %autorelease -b 1 -s git%{shortcommit}
 Summary:     Quickly launch a terminal in Quake mode using a keyboard shortcut
 
 License:     GPL-3.0-only
