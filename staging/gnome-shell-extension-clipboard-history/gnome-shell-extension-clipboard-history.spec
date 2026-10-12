@@ -5,12 +5,12 @@
 %global debug_package  %{nil}
 
 # renovate: datasource=github-releases depName=SUPERCILEX/gnome-clipboard-history
-%global commit      1d22d3df0fd36d226a665d6943c92e7417b75afc
+%global commit      1d4ef6632c58d9a0368d314587d0aad4f800d771
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:        gnome-shell-extension-gnome-clipboard-history
-Version:     1.4.7
-Release:     %autorelease -b 8 -s git%{shortcommit}
+Version:     1.5.1
+Release:     %autorelease -b 1 -s git%{shortcommit}
 Summary:     a clipboard manager for GNOME
 
 License:     MIT
