@@ -1,6 +1,6 @@
---- atuin-18.23.0/Cargo.toml	2006-07-24T01:21:28+00:00
-+++ atuin-18.23.0/Cargo.toml	2026-09-24T16:59:37.239091+00:00
-@@ -396,11 +396,6 @@
+--- atuin-18.24.0/Cargo.toml	2006-07-24T01:21:28+00:00
++++ atuin-18.24.0/Cargo.toml	2026-10-16T14:14:42.786675+00:00
+@@ -451,11 +451,6 @@
  [target.'cfg(any(target_os = "linux", target_os = "macos", target_os = "windows", target_os = "illumos"))'.dependencies.tree-sitter-powershell]
  version = "0.26"
  
@@ -12,7 +12,7 @@
  [target.'cfg(target_os = "linux")'.dependencies.arboard]
  version = "3"
  features = ["wayland-data-control"]
-@@ -417,15 +412,6 @@
+@@ -472,15 +467,6 @@
  
  [target."cfg(unix)".dev-dependencies.portable-pty]
  version = "0.9"
@@ -28,7 +28,7 @@
  
  [lints.clippy]
  as_ptr_cast_mut = "warn"
-@@ -540,3 +526,4 @@
+@@ -595,3 +581,4 @@
  verbose_bit_mask = "warn"
  while_float = "warn"
  wildcard_imports = "warn"
