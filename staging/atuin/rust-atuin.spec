@@ -9,7 +9,7 @@
 %global crate atuin
 
 Name:           rust-atuin
-Version:        18.24.0
+Version:        18.24.1
 Release:        %autorelease -e 1
 Summary:        Atuin - magical shell history
 
