@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           mpv
-Version:        0.41.0
-Release:        11%{?dist}
+Version:        0.42.0
+Release:        1%{?dist}
 Epoch:          2
 
 # overall license is GPL-2.0-or-later and LGPL-2.1-or-later
