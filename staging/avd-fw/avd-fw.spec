@@ -4,7 +4,7 @@
 
 Name:     avd-fw
 Version:  0.2
-Release:  2%{?dist}
+Release:  12%{?dist}
 Summary:  Firmware for the Apple Silicon AVD (video decode) V4L2 driver
 
 License:  MIT
@@ -38,7 +38,7 @@ ships under the same names.
   --libdir=lib \
   -Dfirmwaredir=firmware/updates \
   --cross-file=./arm-none-eabi-gcc.ini \
-  --Dvideo-codecs=all \
+  -Dvideo-codecs=all \
   %{nil}
 %meson_build
 
