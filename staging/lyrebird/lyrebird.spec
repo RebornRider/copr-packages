@@ -1,5 +1,5 @@
 %global forgeurl https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird
-%global commit fc105a03c0e0acc2479301c361c012ffed359c43
+%global commit 59ac7e400c384773f5584dbe366516ad04a33d9f
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global source_date_epoch_from_changelog 0
 %global debug_package %{nil}
@@ -10,8 +10,8 @@
 %forgemeta
 
 Name:           lyrebird
-Version:        0.8.1
-Release:        %autorelease -b 3
+Version:        0.10.0
+Release:        %autorelease -b 1
 Summary:        Tor pluggable transport
 # LICENSE is BSD-2-Clause (Tor/Yawning Angel) AND BSD-3-Clause (Go Authors);
 # LICENSE-GPL3.txt covers bundled GPLv3 code.
