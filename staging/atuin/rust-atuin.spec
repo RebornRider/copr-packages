@@ -10,7 +10,7 @@
 
 Name:           rust-atuin
 Version:        18.25.1
-Release:        %autorelease -e 1
+Release:        %autorelease -e 2
 Summary:        Atuin - magical shell history
 
 License:        MIT
@@ -25,6 +25,7 @@ Patch:          atuin-fix-metadata-auto.diff
 
 BuildRequires:  cargo-rpm-macros >= 26
 BuildRequires:  pkgconfig(openssl)
+BuildRequires:  gcc-c++
 
 %global _description %{expand:
 Atuin - magical shell history.}
