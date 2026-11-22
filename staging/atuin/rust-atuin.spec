@@ -9,7 +9,7 @@
 %global crate atuin
 
 Name:           rust-atuin
-Version:        18.24.6
+Version:        18.25.1
 Release:        %autorelease -e 1
 Summary:        Atuin - magical shell history
 
@@ -47,6 +47,7 @@ License:        ((Apache-2.0 OR MIT) AND BSD-3-Clause) AND (0BSD OR MIT OR Apach
 %license cargo-vendor.txt
 %doc CHANGELOG.md
 %doc README.md
+%doc whats-new.txt
 %{_bindir}/atuin
 %{bash_completions_dir}/%{crate}.bash
 %{zsh_completions_dir}/_%{crate}
